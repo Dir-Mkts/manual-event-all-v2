@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Americas Alliance — Manual Maestro Conferencia Anual v0.3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN SYSTEM — UI/UX Pro Max
+   Style: Premium Dark SaaS Dashboard
+   Palette: Deep Slate + Indigo + Amber
+   Typography: Plus Jakarta Sans
+   ═══════════════════════════════════════════════ */
+:root{
+  /* Base surfaces */
+  --bg:       #0d1117;
+  --surface1: #161b27;
+  --surface2: #1e2538;
+  --surface3: #262d42;
+  --border:   #2a3350;
+  --border2:  #364060;
+
+  /* Text */
+  --text1: #f0f4ff;
+  --text2: #a8b4d0;
+  --text3: #64748b;
+
+  /* Accents — phase-agnostic */
+  --indigo:   #6366f1;
+  --indigo2:  #818cf8;
+  --amber:    #f59e0b;
+  --amber2:   #fbbf24;
+  --emerald:  #10b981;
+  --rose:     #f43f5e;
+  --cyan:     #06b6d4;
+  --violet:   #8b5cf6;
+
+  /* Phase colors */
+  --gov:  #8b5cf6;
+  --f0:   #06b6d4;
+  --f1:   #0ea5e9;
+  --f2:   #10b981;
+  --f3:   #f59e0b;
+  --f4:   #ef4444;
+  --eje:  #6366f1;
+  --ft:   #8b5cf6;
+  --pos:  #059669;
+  --kpi:  #64748b;
+
+  /* Spacing & radius */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body{
+  background: var(--bg);
+  color: var(--text1);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SCROLLBAR ─────────────────────────────── */
+::-webkit-scrollbar{ width:6px; height:6px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:var(--border2); border-radius:3px; }
+
+/* ══════════════════════════════════════════
+   TOP NAV
+   ══════════════════════════════════════════ */
+#topnav{
+  position: sticky; top:0; z-index:100;
+  background: rgba(13,17,23,.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  min-height: 56px;
+}
+#topnav::-webkit-scrollbar{ display:none; }
+
+#brand{
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--amber);
+  letter-spacing: .5px;
+  white-space: nowrap;
+  padding-right: 16px;
+  margin-right: 8px;
+  border-right: 1px solid var(--border2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#brand .dot{
+  width:8px; height:8px;
+  background: var(--amber);
+  border-radius:50%;
+  box-shadow: 0 0 8px var(--amber);
+}
+
+.nav-btn{
+  background: none;
+  border: none;
+  color: var(--text3);
+  cursor: pointer;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--r-sm);
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.nav-btn .icon{ font-size:14px; }
+.nav-btn .hint{
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  background: var(--surface2);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.nav-btn:hover{
+  color: var(--text1);
+  background: var(--surface2);
+}
+.nav-btn.active{
+  color: #fff;
+  background: var(--phase-color, var(--indigo));
+  box-shadow: 0 0 16px color-mix(in srgb, var(--phase-color, var(--indigo)) 40%, transparent);
+}
+.nav-btn.active .hint{
+  background: rgba(0,0,0,.2);
+  color: rgba(255,255,255,.7);
+}
+
+/* ══════════════════════════════════════════
+   ROLE BAR
+   ══════════════════════════════════════════ */
+#rolebar{
+  background: var(--surface1);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 20px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#rolebar-label{
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-right: 4px;
+}
+
+.role-btn{
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s;
+}
+.role-btn:hover{
+  border-color: var(--border2);
+  color: var(--text1);
+  background: var(--surface3);
+}
+.role-btn.active{
+  background: color-mix(in srgb, var(--indigo) 20%, transparent);
+  border-color: var(--indigo);
+  color: var(--indigo2);
+}
+.role-count{
+  background: rgba(255,255,255,.1);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.role-btn.active .role-count{
+  background: color-mix(in srgb, var(--indigo) 30%, transparent);
+  color: var(--indigo2);
+}
+
+/* ══════════════════════════════════════════
+   MAIN CONTENT
+   ══════════════════════════════════════════ */
+#main{
+  padding: 28px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════
+   HOME
+   ══════════════════════════════════════════ */
+.home-hero{
+  text-align: center;
+  padding: 48px 20px 36px;
+  position: relative;
+}
+.home-hero::before{
+  content:'';
+  position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:400px; height:300px;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--indigo) 12%, transparent) 0%, transparent 70%);
+  pointer-events:none;
+}
+.home-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: color-mix(in srgb, var(--amber) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
+  color: var(--amber2);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+.home-hero h1{
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text1);
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.home-hero h1 span{ color: var(--indigo2); }
+.home-hero p{
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.phase-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.phase-card{
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.phase-card::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background: var(--c, var(--indigo));
+  opacity:.7;
+}
+.phase-card::after{
+  content:'';
+  position:absolute; top:-40px; right:-20px;
+  width:100px; height:100px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--c, var(--indigo)) 15%, transparent), transparent 70%);
+  pointer-events:none;
+  transition: opacity .2s;
+  opacity:0;
+}
+.phase-card:hover{
+  border-color: var(--c, var(--indigo));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.3), 0 0 0 1px var(--c, var(--indigo));
+}
+.phase-card:hover::after{ opacity:1; }
+
+.phase-card .icon{
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: block;
+}
+.phase-card h3{
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 4px;
+}
+.phase-card p{
+  font-size: 12px;
+  color: var(--text3);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════
+   SECTION HEADER
+   ══════════════════════════════════════════ */
+.section-header{
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.section-header h2{
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-header p{
+  color: var(--text2);
+  font-size: 13px;
+  margin-top: 6px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* ── GATE BOX ─────────────────────────── */
+.gate-box{
+  background: color-mix(in srgb, var(--amber) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amber) 25%, transparent);
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  margin: 16px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.gate-box .lock{
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.gate-box p{
+  font-size: 13px;
+  color: var(--amber2);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.gate-box strong{ color: #fde68a; }
+
+/* ══════════════════════════════════════════
+   PROCEDURE CARDS
+   ══════════════════════════════════════════ */
+.proc-grid{ display:grid; gap:12px; }
+
+.proc-card{
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.proc-card:hover{ border-color: var(--border2); }
+.proc-card.hidden{ display:none; }
+
+.proc-header{
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  position: relative;
+}
+.proc-header::before{
+  content:'';
+  position:absolute; left:0; top:12px; bottom:12px; width:3px;
+  background: var(--c, var(--indigo));
+  border-radius: 0 3px 3px 0;
+}
+.proc-header:hover{ background: rgba(255,255,255,.02); }
+
+.proc-meta{ flex:1; }
+
+.proc-code{
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--c, var(--indigo));
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.proc-title{
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text1);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.proc-info{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.badge{
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.badge-owner{
+  background: color-mix(in srgb, var(--indigo) 15%, transparent);
+  color: var(--indigo2);
+  border: 1px solid color-mix(in srgb, var(--indigo) 25%, transparent);
+}
+.badge-window{
+  background: var(--surface2);
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+.badge-type{
+  background: color-mix(in srgb, var(--emerald) 12%, transparent);
+  color: #6ee7b7;
+  border: 1px solid color-mix(in srgb, var(--emerald) 20%, transparent);
+}
+.badge-type.puntual{
+  background: color-mix(in srgb, var(--amber) 12%, transparent);
+  color: #fcd34d;
+  border: 1px solid color-mix(in srgb, var(--amber) 20%, transparent);
+}
+
+/* Progress */
+.progress-wrap{ margin-top: 10px; }
+.progress-label{
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text3);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.progress-bar{
+  height: 6px;
+  background: var(--surface3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill{
+  height: 100%;
+  border-radius: 3px;
+  background: var(--c, var(--indigo));
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c, var(--indigo)) 60%, transparent);
+}
+
+.proc-toggle{
+  width: 28px; height: 28px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 12px;
+  color: var(--text3);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all .15s;
+}
+.proc-header:hover .proc-toggle{
+  background: var(--surface3);
+  color: var(--text2);
+}
+
+/* ── PROC BODY ─────────────────────────── */
+.proc-body{
+  display: none;
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+}
+.proc-body.open{ display:block; }
+
+.dep-box{
+  background: color-mix(in srgb, var(--amber) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amber) 20%, transparent);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  margin: 14px 0;
+  font-size: 12px;
+  color: #fde68a;
+  font-weight: 500;
+}
+.hitos-box{
+  background: color-mix(in srgb, var(--violet) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--violet) 25%, transparent);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 13px;
+  color: #c4b5fd;
+  font-weight: 500;
+}
+.hitos-box strong{ color: #a78bfa; font-weight: 700; }
+
+/* Steps */
+.steps-list{ margin: 16px 0; }
+.steps-label{
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.steps-label::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background: var(--border);
+}
+
+.step-item{
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  transition: background .15s;
+}
+.step-item:hover{ background: rgba(255,255,255,.025); }
+
+.step-num{
+  background: color-mix(in srgb, var(--c, var(--indigo)) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c, var(--indigo)) 40%, transparent);
+  color: var(--c, var(--indigo));
+  border-radius: 8px;
+  width: 24px; height: 24px;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-text{
+  font-size: 13px;
+  color: var(--text1);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Checklist */
+.check-item{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  transition: background .15s;
+  cursor: pointer;
+}
+.check-item:hover{ background: rgba(255,255,255,.025); }
+.check-item input[type=checkbox]{
+  margin-top: 2px;
+  accent-color: var(--c, var(--indigo));
+  width: 15px; height: 15px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.check-label{
+  font-size: 13px;
+  color: var(--text1);
+  line-height: 1.6;
+  cursor: pointer;
+  font-weight: 500;
+}
+.check-label.checked{
+  color: var(--text3);
+  text-decoration: line-through;
+}
+
+/* Meta grid */
+.meta-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 16px 0;
+}
+.meta-box{
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px;
+}
+.meta-box.full{ grid-column:1/-1; }
+.meta-box h4{
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom: 7px;
+}
+.meta-box p{
+  font-size: 12px;
+  color: var(--text1);
+  line-height: 1.6;
+  font-weight: 500;
+}
+.meta-box.warn{
+  background: color-mix(in srgb, var(--rose) 8%, transparent);
+  border-color: color-mix(in srgb, var(--rose) 25%, transparent);
+}
+.meta-box.warn h4{ color: #fca5a5; }
+.meta-box.warn p{ color: #fecaca; }
+
+/* ══════════════════════════════════════════
+   GOV / FT / TABLES
+   ══════════════════════════════════════════ */
+.info-card{
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  margin-bottom: 14px;
+  border-left: 3px solid var(--gov);
+}
+.info-card h3{
+  font-size: 14px;
+  font-weight: 700;
+  color: #c4b5fd;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info-card p{
+  font-size: 13px;
+  color: var(--text1);
+  line-height: 1.65;
+  font-weight: 500;
+}
+.info-card ul{ margin: 8px 0 0 4px; }
+.info-card ul li{
+  font-size: 13px;
+  color: var(--text1);
+  line-height: 1.65;
+  font-weight: 500;
+  padding: 4px 0 4px 16px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.info-card ul li:last-child{ border-bottom:none; }
+.info-card ul li::before{
+  content:'';
+  position:absolute; left:0; top:13px;
+  width:6px; height:6px;
+  background: var(--gov);
+  border-radius:50%;
+}
+
+.ft-card{
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  margin-bottom: 14px;
+  border-left: 3px solid var(--ft);
+}
+.ft-card h3{
+  font-size: 14px;
+  font-weight: 700;
+  color: #c4b5fd;
+  margin-bottom: 12px;
+}
+.ft-card p{
+  font-size: 13px;
+  color: var(--text1);
+  line-height: 1.65;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.ft-card ul{ margin: 6px 0 0 0; list-style:none; }
+.ft-card ul li{
+  font-size: 13px;
+  color: var(--text1);
+  font-weight: 500;
+  padding: 8px 0 8px 20px;
+  position: relative;
+  border-top: 1px solid var(--border);
+  line-height: 1.5;
+}
+.ft-card ul li:first-child{ border-top:none; }
+.ft-card ul li::before{
+  content:'→';
+  position:absolute; left:0;
+  color: var(--ft);
+  font-size: 12px;
+  top: 9px;
+}
+
+/* Tables */
+.data-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0;
+  font-weight: 500;
+}
+.data-table th{
+  background: var(--surface2);
+  color: var(--text2);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-bottom: 2px solid var(--border2);
+}
+.data-table td{
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text1);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.data-table tr:last-child td{ border-bottom: none; }
+.data-table tr:hover td{ background: rgba(255,255,255,.02); }
+
+.severity-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-weight: 500;
+}
+.severity-table th{
+  background: var(--surface2);
+  color: var(--text2);
+  padding: 9px 12px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-bottom: 2px solid var(--border2);
+}
+.severity-table td{
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text1);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════
+   ANEXOS / KPI / FORMAT TABLES
+   ══════════════════════════════════════════ */
+.anexo-section{ margin-bottom: 32px; }
+.anexo-section h3{
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-box{
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: var(--text1);
+  line-height: 1.65;
+  font-weight: 500;
+}
+.info-box ul{ margin: 6px 0 0 16px; }
+.info-box li{ margin-bottom: 4px; }
+
+.note-box{
+  background: color-mix(in srgb, var(--amber) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amber) 20%, transparent);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #fde68a;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* ══════════════════════════════════════════
+   MINUTO TABLE
+   ══════════════════════════════════════════ */
+.minuto-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-weight: 500;
+}
+.minuto-table th{
+  background: var(--surface2);
+  color: var(--text2);
+  padding: 9px 12px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.minuto-table td{
+  padding: 9px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text1);
+  vertical-align: top;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media(max-width:600px){
+  .meta-grid{ grid-template-columns:1fr; }
+  .phase-grid{ grid-template-columns:1fr 1fr; }
+  #main{ padding:16px 12px; }
+  .nav-btn .hint{ display:none; }
+}
+@media(max-width:400px){
+  .phase-grid{ grid-template-columns:1fr; }
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}
+</style>
+</head>
+<body>
+
+<nav id="topnav" role="navigation" aria-label="Navegación principal">
+  <div id="brand" aria-label="Americas Alliance Manual">
+    <div class="dot" aria-hidden="true"></div>
+    AA Manual
+  </div>
+</nav>
+
+<div id="rolebar" role="toolbar" aria-label="Filtrar por área">
+  <span id="rolebar-label">Área:</span>
+  <button class="role-btn active" data-action="setRole" data-role="all" aria-pressed="true">Todas <span class="role-count" id="rc-all"></span></button>
+  <button class="role-btn" data-action="setRole" data-role="coo" aria-pressed="false">COO <span class="role-count" id="rc-coo"></span></button>
+  <button class="role-btn" data-action="setRole" data-role="ventas" aria-pressed="false">Ventas <span class="role-count" id="rc-ventas"></span></button>
+  <button class="role-btn" data-action="setRole" data-role="marketing" aria-pressed="false">Marketing <span class="role-count" id="rc-marketing"></span></button>
+  <button class="role-btn" data-action="setRole" data-role="sistemas" aria-pressed="false">Sistemas <span class="role-count" id="rc-sistemas"></span></button>
+  <button class="role-btn" data-action="setRole" data-role="finanzas" aria-pressed="false">Finanzas <span class="role-count" id="rc-finanzas"></span></button>
+  <button class="role-btn" data-action="setRole" data-role="eventos" aria-pressed="false">Eventos <span class="role-count" id="rc-eventos"></span></button>
+</div>
+
+<main id="main" role="main"></main>
+
+<script>
+const STAGES=[
+  {id:'home',  label:'Inicio',         icon:'⬡',  hint:'',           color:'var(--indigo)'},
+  {id:'gov',   label:'Gobernanza',     icon:'◈',  hint:'Siempre',    color:'var(--gov)'},
+  {id:'f0',    label:'F0',             icon:'◉',  hint:'T-12→T-9m',  color:'var(--f0)'},
+  {id:'f1',    label:'F1',             icon:'◉',  hint:'T-9→T-6m',   color:'var(--f1)'},
+  {id:'f2',    label:'F2',             icon:'◉',  hint:'T-6→T-3m',   color:'var(--f2)'},
+  {id:'f3',    label:'F3',             icon:'◉',  hint:'T-3m→T-30d', color:'var(--f3)'},
+  {id:'f4',    label:'F4',             icon:'◉',  hint:'T-30d→T-0',  color:'var(--f4)'},
+  {id:'eje',   label:'F5 — Op.',       icon:'◎',  hint:'T-0→T+1d',   color:'var(--eje)'},
+  {id:'ft',    label:'FT',             icon:'◧',  hint:'Permanente', color:'var(--ft)'},
+  {id:'pos',   label:'F6 — Cierre',   icon:'◉',  hint:'T+1→T+30d',  color:'var(--pos)'},
+  {id:'kpi',   label:'KPIs / RACI',   icon:'▤',  hint:'',           color:'var(--kpi)'},
+  {id:'anexos',label:'Anexos',         icon:'◫',  hint:'',           color:'var(--kpi)'},
+];
+
+const GATES={
+  f0:'Contrato hotelero firmado + presupuesto base CEO aprobado',
+  f1:'Sitio web activo + primeras inscripciones + primer patrocinador cerrado',
+  f2:'Todos los contratos de producción firmados + agenda confirmada',
+  f3:'100% proveedores confirmados + inventario recibido y verificado',
+  f4:'Go formal del COO con acta firmada',
+  eje:'Cierre de sede + bitácora firmada por COO → abrir Fase 6',
+  pos:'Informe final aprobado por CEO → edición oficialmente cerrada',
+};
+
+const PHASE_DESC={
+  f0:'El evento no existe aún de manera pública. Esta fase cierra cuando el CEO aprueba sede, fechas y presupuesto base, y se firma el contrato hotelero. Ningún procedimiento de fases posteriores debe activarse sin esa puerta cerrada.',
+  f1:'El evento existe públicamente. Esta fase crea la identidad visual, fija precios y lanza la convocatoria. Solo cuando el branding y los mensajes están aprobados se abren las reservaciones.',
+  f2:'Se contratan y cierran todos los servicios de producción. Cierra cuando cada proveedor tiene contrato firmado y la agenda del evento está confirmada en versión aprobada.',
+  f3:'Se construyen los instrumentos de operación: scheduler, transporte, kits, escaletas y permisos. Cierra cuando el 100% de proveedores está confirmado y el inventario de materiales está recibido y verificado.',
+  f4:'Cierre de todos los procesos abiertos. Ningún proveedor nuevo. Conciliaciones, mensajería final y verificación Go/No-Go. Cierra con acta firmada por el COO habilitando el inicio del evento.',
+  eje:'La operación se rige por la agenda aprobada de la edición correspondiente y por una reunión diaria de staff antes de abrir el primer servicio. Las franjas del Anexo A son referencia, no plantilla rígida.',
+  ft:'Este capítulo no es secuencial: contiene las reglas del juego que aplican en TODAS las fases. Debe leerse antes de la primera reunión de planificación y estar disponible durante la operación.',
+  pos:'El evento no cierra cuando termina la fiesta: cierra cuando todas las excepciones tienen responsable, solución y fecha. Esta fase consume información de los procesos continuos de todas las fases anteriores.',
+};
+
+const PROCS=[
+  {id:'f0-01',code:'F0-01',stage:'f0',title:'Definición de sede, fechas y concepto',owner:'COO',support:'Según matriz RACI',window:'T-12 a T-10 meses',type:'puntual',roles:['coo'],
+   steps:['Fijar metas: empresas representadas, países, asistentes, patrocinadores, experiencia y resultado financiero.','Identificar posibles fechas y conflictos con ferias de logística, temporadas turísticas, clima y festividades.','Comparar ciudades por conectividad aérea, seguridad, requerimientos de visa, acceso a proveedores y atractivo para asistentes.','Proponer un concepto cultural local coherente con la sede sin convertirlo en requisito para eventos corporativos.','Preparar agenda preliminar incluyendo día social anticipado, días de negocio, actividades sociales y check-out.','Presentar opciones y recomendación para aprobación de Dirección General.'],
+   evidence:'Ficha de edición aprobada: lugar, ventana de fechas, objetivos, supuestos de aforo y calendario preliminar.',control:'No comercializar fechas y sede como definitivas hasta contar con autorización y compromisos viables.',deviation:'Si la ciudad o fecha falla, activar segunda opción documentando costos hundidos y fecha tope de decisión.'},
+  {id:'f0-02',code:'F0-02',stage:'f0',title:'Scouting y contratación del hotel',owner:'COO',support:'Finanzas, Ventas',window:'T-11 a T-8 meses',type:'puntual',roles:['coo','ventas','finanzas'],dep:'F0-01 aprobado; estimación razonable de habitaciones y asistentes.',
+   steps:['Solicitar al menos dos o tres propuestas comparables; especificar tipo de habitación, noches, régimen alimenticio y salones.','Verificar número y superficie de salones según máximo de reuniones simultáneas, circulación, accesibilidad, barras y áreas sociales.','Inspeccionar o solicitar evidencias de salas, acústica, iluminación, área de check-in especial, almuerzo y espacio para foto grupal.','Comparar tarifa total con tasas, impuestos, servicios, penalizaciones, attrition, release dates, overbooking y categorías.','Negociar bloque garantizado/no garantizado, fechas límite de release, reducción de cupo, cortesía, cambios de nombres y noches extra.','Confirmar por escrito quién factura a quién, método de pago, depósitos, divisa, tipo de cambio y política de cargos extra.','Anexar planos y programación tentativa de montajes, coffee breaks, cóctel y gala al contrato o BEO del hotel.','Enviar contrato y matriz de riesgos al CEO para aprobación; después custodiar versión firmada y calendario de pagos.'],
+   evidence:'Contrato hotelero y ficha de obligaciones con cuenta regresiva de pagos, cortes de habitaciones y espacios.',control:'La tarifa ofrecida a los miembros debe monitorearse frente a la web del hotel y canales de venta; buscar que sea competitiva e idealmente menor a la pública comparable.',deviation:'No resolver extras por llamada sin confirmación escrita. Si falla capacidad hotelera, activar lista de overflow negociada.'},
+  {id:'f0-03',code:'F0-03',stage:'f0',title:'Presupuesto, flujo de caja y pagos',owner:'COO / Administración',support:'CEO / Ventas',window:'Se activa en F0 — seguimiento continuo hasta T+30 días',type:'continuo',roles:['coo','ventas','finanzas'],hitos:'Apertura en F0 · Actualización en F1 (tarifas y paquetes) · Revisión semanal en F3 · Conciliación diaria en F4 y F5 · Cierre en F6.',
+   steps:['Elaborar ingresos por cuotas de participación, hospedaje y patrocinios según el modelo aprobado.','Desglosar costos por hotel, salones, alimentos/bebidas, producción AV, entretenimiento, kits, traslados, marketing, personal, impuestos y contingencia.','Distinguir presupuesto, comprometido, facturado, pagado, cobrado y saldo; registrar divisa y tipo de cambio.','Establecer calendario de anticipos a hotel y proveedores y vencimientos de cobro a agentes.','Proponer reglas de autorización para descuentos, extras, reembolsos, créditos y gastos no previstos.','Conciliar al menos semanalmente durante preparación final y diariamente si hay movimientos relevantes.'],
+   evidence:'Presupuesto versionado y flujo de pagos/cobros conciliados con contratos y documentos soporte.',control:'Meta operativa: llegar al inicio con cobros y pagos críticos liquidados según contratos. Cualquier excepción debe tener responsable y fecha.',deviation:'Escalar desviaciones antes de autorizar servicio adicional.'},
+
+  {id:'f1-01',code:'F1-01',stage:'f1',title:'Plan de marketing, identidad visual y comunicaciones',owner:'Marketing',support:'Ventas / Diseño / Sistemas',window:'T-9 meses — desarrollo inicial; actualizaciones continuas hasta post-evento',type:'puntual',roles:['marketing','sistemas','ventas'],dep:'F0-01 aprobado (sede, fechas, concepto). Esta fase PRECEDE a la apertura de reservaciones (F1-04).',
+   steps:['Desarrollar identidad visual del evento: nombre de edición, paleta, tipografía, flyer, teaser, sitio web y campaña multicanal.','Preparar agenda preliminar pública, mensajes clave y materiales de lanzamiento.','Solicitar archivos oficiales de logotipo, nombre de empresa y perfil de cada asistente o sponsor y revisar autorizaciones de difusión.','Planificar publicaciones "I\'m attending", "I\'m Sponsor", anuncios de host sponsor y sponsors por evento o nivel.','Incluir etiquetas correctas de redes sociales en cada publicación y guardar enlaces como evidencia.','Preparar correos y mensajes de WhatsApp sobre hotel, precios, códigos de vestimenta, transporte, puntos de reunión y cambios.','Programar videos explicativos: uso del scheduler, No Show, BPS, PPP, próximas conferencias, participantes y sponsors.','Revisar semanalmente calendario editorial, piezas aprobadas, pendientes y resultados.'],
+   evidence:'Identidad visual aprobada, sitio web activo, primer contenido publicado, calendario editorial activo.',control:'Todo sponsor anunciado debe tener categoría y beneficios verificados; prohibido inventar patrocinio, precio o horario.',deviation:'Errores en logos/etiquetas: corregir inmediatamente, guardar rectificación y avisar al comercial.'},
+  {id:'f1-02',code:'F1-02',stage:'f1',title:'Comercialización y cumplimiento de patrocinios',owner:'Ventas',support:'Marketing / COO / Finanzas',window:'Se activa en F1 — seguimiento continuo hasta T+30 días',type:'continuo',roles:['ventas','marketing','coo','finanzas'],hitos:'Apertura de paquetes en F1 · Cierre de nuevos patrocinios en F3 · Verificación de beneficios en F4 · Ejecución en F5 · Evidencias en F6.',dep:'F0-03 paquetes aprobados; F1-01 identidad lista.',
+   steps:['Definir inventario de patrocinios: Host Sponsor exclusivo del país anfitrión, actividades (cóctel, gala, Halloween, coffee break), niveles (Diamond, Emerald, Gold, Silver) y artículos.','Validar con CEO condiciones, exclusividad, precios, inventario disponible y derechos por nivel.','Formalizar carta de beneficios con entregables, ubicación, menciones, videos, discursos, materiales, fechas y pago.','Abrir ficha de cada sponsor en la matriz de cumplimiento; solicitar logo vectorial, redes oficiales y representante que asistirá.','Asociar cada promesa a una actividad y a una pieza de evidencia (foto, video, publicación, minuta, banner).','Hacer una doble revisión de videos, discursos, banners y reconocimientos antes de las ceremonias.','Cerrar con evidencia y comunicación de agradecimiento personalizada.'],
+   evidence:'Inventario vendido, matriz de beneficios verificables y acta de cumplimiento por sponsor.',control:'No puede haber dos Host Sponsors en una misma edición; la elegibilidad local se valida antes de cerrar. Ningún video se considera ejecutado hasta comprobar su reproducción.',deviation:'Si se omite un beneficio, registrar incidencia, evaluar remedio y solicitar aprobación comercial.'},
+  {id:'f1-03',code:'F1-03',stage:'f1',title:'Convocatoria e inscripción de agentes',owner:'Ventas',support:'Marketing / Sistemas',window:'Se activa en F1 — cierra en F4 (T-7 días)',type:'continuo',roles:['ventas','marketing','sistemas'],hitos:'Lanzamiento en F1 · Conciliación semanal en F2-F3 · Cortes diarios en F4 · Cierre definitivo T-7 días.',dep:'F0-02 hotel / F0-03 presupuesto / F1-01 identidad visual lista.',
+   steps:['Publicar fecha, ciudad, hotel, programa, precio y condiciones de participación; abrir canal de consultas.','Asignar a cada ejecutivo la cartera de agentes que debe contactar personalmente.','Difundir anuncio por grupos oficiales, correo, sitio y redes con mensaje idéntico.','Registrar lead, interés, contacto, estado de participación, pago y restricciones especiales.','Enviar actualizaciones de tarifas e hitos del evento según calendario de preventa.','Conciliar semanalmente el número de inscritos, pagos y huéspedes contra capacidades contratadas.','Confirmar instrucciones de viaje y restricciones de visa según nacionalidad y destino.'],
+   evidence:'Base de agentes vigente con estado comercial y comunicación trazable.',control:'Distinguir participantes confirmados de interesados; evitar publicar cifras de asistencia no conciliadas.',deviation:'Si aumentan las solicitudes más allá de capacidad, activar lista de espera y aprobación de cupos adicionales.'},
+  {id:'f1-04',code:'F1-04',stage:'f1',title:'Rooming list, tarifas y reservaciones',owner:'Ventas / Atención a Miembros',support:'COO / Finanzas',window:'Se activa después de F1-01 y F1-03 — continúa hasta check-out',type:'continuo',roles:['ventas','coo','finanzas'],dep:'F0-02 contrato firmado + F1-01 aprobado + F1-03 lanzado.',hitos:'Apertura en F1 · Cortes semanales F2-F3 · Cortes diarios F4 · Cierre de cambios en F4 (T-7 días) · Conciliación final pre check-in.',
+   steps:['Conservar un solo registro maestro con nombre, empresa, tipo de habitación, fechas de entrada/salida, pago y código del hotel.','Recibir solicitud del agente y revisar cupo disponible, tarifa vigente, vencimiento de preventa y cancelación.','Solicitar confirmación al hotel bajo el contrato de Americas Alliance y conciliar número, nombres y noches.','Enviar a participante confirmación y reglas de cambios, late check-out, early departure y no-show.','Ejecutar revisiones periódicas entre reservas, listado del hotel, facturas y pagos recibidos.','Elevar al COO cualquier alza de tarifa, diferencia frente a canales públicos o agotamiento anticipado del bloque.','Preparar cortes semanales y luego diarios cuando se acerque el evento; aplicar cierres de cambios acordados.'],
+   evidence:'Rooming list reconciliada, respaldos de confirmación y reporte de habitaciones vendidas, disponibles y en riesgo.',control:'Nunca confirmar una habitación sin respuesta inequívoca del hotel; no prometer reembolso/late check-out si el contrato no lo permite.',deviation:'Para llegadas anticipadas o salidas tempranas intentar negociación de créditos, pero no garantizarla.'},
+  {id:'f1-05',code:'F1-05',stage:'f1',title:'Relaciones públicas y ruedas de prensa',owner:'Marketing',support:'CEO / COO / Audiovisual',window:'Se activa en F1 — cobertura continua hasta post-evento',type:'continuo',roles:['marketing','coo'],hitos:'Primera convocatoria en F1 · Rueda de lanzamiento en F1-F2 · Cobertura durante F5 · Rueda de resultados en F6.',
+   steps:['Preparar mensajes sobre sede, fechas, actividades y contribución comercial sin declarar resultados no verificados.','Identificar medios locales, estatales y nacionales e invitar voceros autorizados.','Redactar dossier y material visual aprobado, con marca de sponsors cuando proceda.','Coordinar venue, micrófonos, fotografía, entrevistas y lista de medios.','Difundir comunicado, conservar clips y enlaces y preparar rueda de resultados posterior.','Revisar cifras finales de asistentes, empresas, países y actividad económica antes de publicarlas.'],
+   evidence:'Convocatorias, mensajes aprobados, lista de medios y clipping de cobertura.',control:'Datos de impacto y asistencia deben contar con fuente interna conciliada.',deviation:'Una pregunta de prensa sensible se remite al vocero designado; staff no especula.'},
+
+  {id:'f2-01',code:'F2-01',stage:'f2',title:'Selección de sedes y actividades externas',owner:'COO',support:'Eventos / Transporte / Marketing',window:'T-6 a T-2 meses',type:'puntual',roles:['coo','eventos','marketing'],dep:'F0-01 agenda preliminar + F0-02 hotel confirmado.',
+   steps:['Relacionar cada actividad con formato, aforo realista, objetivo, ambiente, horario y necesidad de salida del hotel.','Evaluar lugar, acceso, clima, baños, electricidad, audio, vecinos, exclusividad, servicio de alimentos y alternativas bajo techo.','Realizar visita técnica; fotografiar espacios y dibujar plano de asistentes, escenario, montaje y transporte.','Negociar contrato, permisos, fechas de montaje, póliza de seguros si aplica y horario de terminación.','Integrar culturalmente entretenimiento local sin afectar los bloques de reuniones de negocio.','Confirmar ubicación y punto de encuentro de buses, ventana de carga/descarga, tránsito y tiempos de transferencia.'],
+   evidence:'Ficha técnica, contrato y plan de contingencia de cada sede.',control:'Una sede externa no se considera lista sin transporte/operación de regreso y aforo permitido.',deviation:'Ante lluvia u otra suspensión: usar sede alterna o formato reducido aprobado y avisar por canal oficial.'},
+  {id:'f2-02',code:'F2-02',stage:'f2',title:'Programación artística y catering',owner:'COO',support:'Marketing / Hotel / Eventos',window:'T-4 meses hasta cada actividad',type:'puntual',roles:['coo','marketing','eventos'],dep:'F2-01 sedes / F2-03 AV.',
+   steps:['Definir concepto cultural por evento; contratar agrupaciones locales, DJ o show según aforo, tipo de público y duración.','Revisar permisos, seguridad de efectos especiales, rider técnico, acceso de artistas y horarios de ensayo.','Diseñar menús por tipo de evento: canapés en cócteles y despedida; coffee break continuo en One-to-One; buffet ágil para gala.','Solicitar información sobre restricciones alimentarias, alergias, opciones vegetarianas y servicio sin alcohol.','Asegurar estaciones espejo de buffet en gala para reducir filas; coordinar personal y reposición.','Confirmar que el ambiente y la comida transmitan el carácter de gala, bienvenida o fiesta de despedida sin afectar protocolo.'],
+   evidence:'Menús aprobados, ficha de show, rider, permisos y cronograma de servicio.',control:'Las máquinas de toques, fuego y efectos eléctricos son ejemplos 2026, no estándares; evaluar riesgos y sustituir por entretenimiento seguro cuando convenga.',deviation:'Si proveedor cancela, usar opción de sustitución aprobada y comunicar impacto.'},
+  {id:'f2-03',code:'F2-03',stage:'f2',title:'Audio, video, iluminación y pruebas',owner:'COO',support:'Marketing / Producción / Sistemas',window:'T-4 meses a cada evento',type:'puntual',roles:['coo','marketing','sistemas'],dep:'F1-02 compromisos de sponsors.',
+   steps:['Levantar necesidades independientes para cóctel, inauguración, sesiones 1:1, gala y despedida, sin sobredimensionar áreas.','Cotizar pantalla principal, pantallas secundarias, bocinas, micrófonos, operador, iluminación, proyector, cableado y montaje/desmontaje.','Comparar propuestas técnica y económicamente; exigir rider de artistas, rutas de cable seguras y plan de energía.','Contratar incluyendo fechas y horarios de montaje, prueba, operación, desmontaje y respaldo de equipo.','Solicitar archivos y videos con anticipación y probar audio, formato, resolución y orden de reproducción.','Realizar ensayo con presentador, técnico AV y protocolo antes de cada ceremonia.'],
+   evidence:'Rider técnico autorizado, pruebas firmadas y lista de reproducción final versionada.',control:'Todo video de sponsor se marca como visto y aprobado por segundo revisor; verificar no solo que el archivo exista, sino que sí se proyecte.',deviation:'Ante falla, operador AV activa respaldo local y micrófono alternativo.'},
+
+  {id:'f3-01',code:'F3-01',stage:'f3',title:'Reuniones One-to-One y scheduler',owner:'Sistemas',support:'Ventas / Eventos / COO',window:'T-3 meses a fin de reuniones',type:'puntual',roles:['sistemas','ventas','coo','eventos'],dep:'F1-03 base de asistentes / F0-02 salón.',
+   steps:['Definir fecha de apertura/cierre del scheduler con Ventas y COO.','Informar a los agentes duración de 20 minutos, reglas de invitación, cancelación y No Show.','Configurar horarios, disponibilidad, mesas VIP fijas y asignación de mesas rotativas.','Calcular pico de simultaneidad por franja; asignar al menos ese número de mesas y prever de 2 a 5 adicionales según espacio.','Verificar agendas impresas o digitales con empresa, contraparte, hora y número de mesa.','Realizar pruebas de autenticación, impresiones, red, cronómetro, pantallas de anuncios y modo de contingencia.','Cerrar y congelar agenda según plazo comunicado, conservando procedimiento para cambios autorizados.'],
+   evidence:'Matriz de aforo por franja, planos de mesas, agendas individuales y pruebas documentadas.',control:'Si pico=40 reuniones simultáneas, planificar mínimo 40 mesas y 2–5 de reserva si cabe.',deviation:'Falla del sistema: entregar agendas exportadas/impresas y bitácora manual de cambios.'},
+  {id:'f3-02',code:'F3-02',stage:'f3',title:'Transporte y confirmación de asistencia',owner:'Coordinación de Eventos',support:'Marketing / Ventas / COO',window:'T-3 meses hasta cada retorno',type:'continuo',roles:['eventos','marketing','ventas','coo'],hitos:'Contratación de unidades en F3 · Confirmaciones por actividad en F4 · Manifiestos y conteo en F5.',dep:'F2-01 actividades externas.',
+   steps:['Clasificar traslados aeropuerto-hotel, hotel-evento externo y retornos; definir qué está incluido y qué se paga directamente.','Abrir confirmación por actividad; preferir un enlace único con cierre, cupos, cambios y listado descargable.','Conciliar confirmados con capacidad y contratar unidades con holgura razonable, evitando sobrecontratación.','Definir horarios, punto de encuentro, rutas, responsables, teléfonos y política de no-show/cancelación.','Enviar confirmación antes de cada actividad e informar explícitamente la hora límite de abordaje.','Designar contador de salida y responsable de bus; registrar asistentes subidos, salidas y regresos.','Preparar plan de espera, unidad adicional o transporte alternativo para picos y viajeros rezagados.'],
+   evidence:'Manifiestos de pasajeros por actividad, rutas y contrato con capacidad contratada.',control:'Comparar confirmados versus abordados; revisar la desviación de capacidad para optimizar próximos eventos.',deviation:'Nunca obligar a abordar a quien prefiera regresar por cuenta propia.'},
+  {id:'f3-03',code:'F3-03',stage:'f3',title:'Kits de bienvenida y productos patrocinados',owner:'Marketing / Eventos',support:'Ventas / Sistemas / Proveedores',window:'T-4 meses hasta registro',type:'puntual',roles:['marketing','eventos','ventas','sistemas'],dep:'F1-03 asistentes confirmados / F3-01 agendas.',
+   steps:['Definir composición del kit: mochila, playera personalizada, bloc, pluma, set de escritorio, gafete/lanyard, agenda One-to-One y artículos adicionales.','Solicitar propuestas y muestras, medir utilidad, visibilidad del sponsor y vida útil del obsequio.','Aprobar artes, tallas, nombres, cantidad de invitados, repuestos y calendario de producción con tiempo para reimpresión.','Validar productos especiales (pluma con tecnología RFID/NFC, lanyard-cable de carga) y probar compatibilidad real.','Recibir por lote, contar, cotejar calidad y clasificar alfabéticamente; preparar kit de contingencia para recién llegados/cambios.','Incluir agenda individual tras cierre del scheduler y verificar que coincida con gafete y empresa.','Registrar entrega contra lista; separar kits de asistentes cancelados o no presentados.'],
+   evidence:'Inventario con cantidades, muestras aprobadas, acta de recepción y listado de entrega.',control:'No usar cantidades históricas como metas universales. La playera de grupo debe estar disponible antes de la foto oficial.',deviation:'Si falta material, entregar constancia y fecha de entrega/reembolso autorizada.'},
+  {id:'f3-04',code:'F3-04',stage:'f3',title:'Protocolos, reconocimientos y escaletas',owner:'Marketing / COO',support:'CEO / Ventas / Producción',window:'T-2 meses a cada acto',type:'continuo',roles:['marketing','coo','ventas'],hitos:'Borrador de escaletas en F3 · Validación de listas en F4 · Ensayo y congelamiento en F4 (T-7 días) · Ejecución en F5.',dep:'F1-02 matriz de sponsors / F3-01 programa.',
+   steps:['Crear inventario de momentos: cóctel, corte de listón, nuevos miembros, invitados, cumpleaños, premios, gala y despedida.','Solicitar a Ventas/CEO lista de personas, cargos, pronunciación de nombres, orden y categoría.','Asignar presentador, discursos, minutos previstos, reconocimientos físicos, videos y señas de AV.','Preparar guion y escaleta con hora prevista, responsable de escenario, archivo, micrófono y entregador.','Hacer doble cotejo de listas de sponsors, nuevos miembros, BPS, trayectorias, staff y premios.','Ensayar intervenciones y confirmar asistencia real de quien recibirá reconocimientos.','Marcar cada segmento ejecutado en mesa de control antes de cerrar ceremonia.'],
+   evidence:'Escaleta final minuto a minuto, hoja de protocolo y acta de pruebas de video/placas.',control:'No reutilizar listas antiguas sin validarlas; la omisión de un sponsor es una incidencia crítica.',deviation:'Ausencia del homenajeado: establecer suplente o reconocer sin foto individual, con aprobación.'},
+  {id:'f3-05',code:'F3-05',stage:'f3',title:'Seguros, permisos y plan de contingencia',owner:'COO',support:'Marketing / Producción / Finanzas',window:'T-3 meses a T-7 días',type:'puntual',roles:['coo','marketing','finanzas'],dep:'F2-01 sedes / F2-02 shows.',
+   steps:['Evaluar cobertura de responsabilidad civil para actividades externas, shows, alcohol y deportes.','Tramitar permisos locales y de uso de suelo para eventos en espacio público o semi-público.','Preparar plan de evacuación, rutas de emergencia y contactos de servicios de salud para cada sede.','Comunicar protocolo de seguridad al equipo, proveedores y, cuando proceda, a los asistentes.','Documentar los planes de contingencia de cada actividad (lluvia, falla eléctrica, ausencia de proveedor, incidente médico).'],
+   evidence:'Pólizas o confirmaciones de seguro, permisos obtenidos y planes de contingencia por actividad.',control:'Ninguna actividad con riesgo elevado (shows pirotécnicos, deporte, alcohol) arranca sin seguro y permiso firmado.'},
+
+  {id:'f4-01',code:'F4-01',stage:'f4',title:'Conciliaciones y cierres financieros previos al evento',owner:'COO / Administración',support:'CEO / Ventas',window:'T-30 días a T-0',type:'puntual',roles:['coo','finanzas','ventas'],
+   steps:['Verificar que todos los anticipos a hotel y proveedores críticos estén liquidados según contratos.','Cerrar rooming list de cambios (congelar solicitudes de nuevo ingreso o modificación).','Revisar cobros pendientes de agentes e inscripciones; gestionar excepciones autorizadas.','Preparar listado de cuentas por cobrar/pagar que quedarán para T+1 a T+7.'],
+   evidence:'Estado de cobros/pagos previo al evento con responsable y fecha de cada excepción.'},
+  {id:'f4-02',code:'F4-02',stage:'f4',title:'Mensajería y orientación al participante',owner:'Marketing',support:'Ventas / Sistemas',window:'T-30 días a T-1 día',type:'puntual',roles:['marketing','ventas','sistemas'],dep:'F1-03 base de inscritos.',
+   steps:['Enviar correo/mensaje de bienvenida con instrucciones de llegada, check-in, kits y actividades.','Comunicar puntos de encuentro, horarios de registro, código de vestimenta y reglas de transporte.','Repetir mensaje de transporte antes de cierre de registros, y de cada evento externo la víspera.','Mantener un canal de respuesta rápida para preguntas operativas de asistentes.','Publicar recordatorio de no-show del scheduler y consecuencias.'],
+   evidence:'Bitácora de mensajes enviados, respuestas y casos atendidos.',control:'El canal social no reemplaza la comunicación oficial; toda instrucción operativa debe ir por correo o mensaje formal.'},
+  {id:'f4-03',code:'F4-03',stage:'f4',title:'Go/No-Go y llegada del staff',owner:'COO',support:'Todas las áreas',window:'T-7 a T-0',type:'puntual',roles:['coo','ventas','marketing','sistemas','finanzas','eventos'],dep:'Todos los procedimientos F0-02 a F3-05 completos.',
+   steps:['Convocar reunión de revisión con todas las áreas; verificar actividad por actividad que cada dependencia esté resuelta.','Emitir resolución Go / Go condicionado / No-Go por cada actividad del programa.','Confirmar llegada del staff, roles, turno, uniforme, credencial y número de contacto.','Distribuir plan de comunicación de staff: radios, grupos de WhatsApp operativos y árbol de escalamiento.','Realizar walkthrough en hotel: registro, salones, áreas sociales, almacenamiento, AV, señalética y puntos de emergencia.','Dejar acta firmada con pendientes resueltos o con responsable y hora máxima de cierre.'],
+   evidence:'Acta de Go/No-Go por actividad, lista de staff con roles y contactos, walkthrough completado.',control:'El acta de Go/No-Go es el semáforo operativo; ningún COO debe habilitarlo con pendientes críticos abiertos.',deviation:'Pendiente crítico sin solución a T-1: escalar inmediatamente al CEO con opciones y costos.'},
+
+  {id:'eje-00',code:'EJE-00',stage:'eje',title:'Día previo no oficial — integración social',owner:'COO / Ventas',support:'Marketing',window:'Día -1 (tarde-noche)',type:'puntual',roles:['coo','ventas','marketing'],dep:'F3-02 transporte confirmado; F1-04 rooming list con llegadas esperadas.',steps:['Este día no forma parte del programa oficial; sin embargo, aprovechar la llegada temprana para generar un primer punto de contacto informal entre asistentes.','Elegir un venue accesible desde el hotel, con reservación o cupo suficiente y fácil regreso.','Comunicar el lugar, hora y punto de reunión a los asistentes confirmados con llegada ese día; aclarar que es actividad opcional y sin costo cubierto o indicar qué cubre Americas Alliance.','Designar al menos un miembro del equipo como anfitrión; no es necesario staff completo.','Confirmar que las llegadas al hotel ya tienen habitación asignada y kit disponible o programado para el día siguiente.','Registrar asistencia real para contraste con reservaciones del hotel.'],evidence:'Bitácora de llegadas del día y nota de asistencia a la reunión informal.',control:'No realizar compromisos de patrocinio, discursos ni actos protocolares en el día previo; ese día es social, no oficial.',deviation:'Si hay muy pocas llegadas, el anfitrión puede cancelar sin comunicado masivo.'},
+  {id:'eje-01',code:'EJE-01',stage:'eje',title:'Día 1 — Registro, hospitalidad y entrega de kits',owner:'Eventos / Staff de registro',support:'Ventas / Hotel / Sistemas',window:'Día 1 · tarde (ventana aprox. 15:00–19:00)',type:'puntual',roles:['eventos','ventas','sistemas'],dep:'F3-03 kits listos y clasificados; F1-04 rooming list conciliada; F3-01 agendas impresas/digitales.',steps:['Montar mesa de registro en área acordada con el hotel: banner o señalética de AA, kits ordenados alfabéticamente, lista de asistentes, bolígrafos y sello o credencial si aplica.','Colocar señalética interna desde la entrada del hotel hasta el punto de registro.','Habilitar mesa de tours o actividades opcionales con información y precios claros.','Verificar instalación de pared gráfica o backdrop para fotos en área de bienvenida.','Dos personas mínimo en mesa de registro: una entrega kit y verifica nombre, otra resuelve dudas y registra incidencias.','Entregar agenda individual (scheduler) verificando que coincida con el gafete y la empresa.','Registrar cada entrega contra lista; separar kits de cancelados o no presentados.','Mantener un kit de contingencia para llegadas tardías, cambios de nombre o invitados de último momento.'],evidence:'Lista de entrega firmada o marcada; inventario residual; reporte de incidencias de registro.',control:'No cerrar mesa de registro antes de confirmar que el 90% de los esperados ese día ya llegó o de tener ETA de los restantes.',deviation:'Kit faltante: entregar constancia escrita y fecha/método de envío posterior autorizado.'},
+  {id:'eje-02',code:'EJE-02',stage:'eje',title:'Día 1 — Cóctel de bienvenida',owner:'COO / Eventos',support:'Marketing / AV / Hotel',window:'Día 1 · noche (aprox. 20:00–23:00)',type:'puntual',roles:['coo','eventos','marketing'],dep:'EJE-01 registro completado; F1-02 beneficios del host sponsor verificados; F3-04 escaleta aprobada; F2-03 AV montado y probado.',steps:['Verificar montaje del salón: configuración de mesas o standing, decoración, barras de bebidas, música ambiental y accesos.','Confirmar que el host sponsor del país anfitrión y los sponsors del cóctel tienen sus materiales en posición.','Revisar escaleta: presentación institucional de AA, palabras de bienvenida del CEO, presentación del host sponsor, brindis oficial y momento fotográfico.','Coordinar con AV: micrófonos probados, música en pausa para discursos, pantalla con contenido correcto y video del sponsor activo si aplica.','Confirmar menú del cóctel: canapés, opciones sin alcohol y servicio de barra.','Preparar momento de honores o reconocimientos si está en escaleta.','Designar fotógrafo y videógrafo con lista de tomas obligatorias.','Asignar un miembro del equipo como enlace de operación durante el evento.'],evidence:'Escaleta ejecutada con hora real de cada momento; fotos de tomas obligatorias; registro de incidencias.',control:'El discurso del sponsor se confirma con el representante designado antes del evento.',deviation:'Falla de AV: continuar con micrófono inalámbrico de respaldo; retrasar discursos máximo 10 minutos.'},
+  {id:'eje-03',code:'EJE-03',stage:'eje',title:'Día 2 — Apertura oficial y corte de listón',owner:'CEO / COO',support:'Marketing / AV / Protocolo',window:'Día 2 · mañana (aprox. 09:00–09:30)',type:'puntual',roles:['coo','marketing'],dep:'F3-04 escaleta de apertura; F1-02 orden de sponsors; F2-03 AV operativo.',steps:['Montar área de corte de listón o ceremonia de apertura antes de que lleguen los asistentes al salón.','Preparar orden del acto: himno o música institucional, palabras del CEO/directivos, presentación de edición y sede, agradecimiento a sponsors principales, corte de listón y foto oficial.','Coordinar con protocolo: posiciones de oradores, tiempo de cada intervención (máximo 3–4 minutos por orador).','Pantallas: slides de apertura con nombre del evento, edición, año, sede y logos de sponsors en orden de categoría.','Confirmar que el salón de One-to-One está listo para abrir inmediatamente después de la ceremonia.','Fotógrafo en posición para corte de listón y foto grupal de directivos y sponsors en el escenario.'],evidence:'Fotos de corte de listón y oradores; escaleta ejecutada; hora real de inicio y cierre.',control:'La apertura no debe rebasar los 30 minutos para no comprometer el primer bloque de reuniones.',deviation:'Retraso de asistentes: iniciar con quorum razonable. Falla de AV: continuar el acto en vivo sin apoyo de pantalla.'},
+  {id:'eje-04',code:'EJE-04',stage:'eje',title:'Días 2 y 3 — Reuniones One-to-One',owner:'Sistemas / Eventos',support:'Ventas / COO',window:'Cuatro bloques: Día 2 mañana, Día 2 tarde, Día 3 mañana, Día 3 tarde',type:'continuo',roles:['sistemas','eventos','ventas','coo'],dep:'F3-01 scheduler configurado; EJE-03 apertura completa; salón habilitado con mesas numeradas.',steps:['Verificar que todas las mesas estén numeradas y en posición antes de abrir cada bloque.','Asignar mesa de coordinación con cronómetro, pantalla de anuncios, megáfono o sistema de señal y listado de cambios autorizados.','Comunicar antes de cada bloque: duración de reunión (20 min), señal de inicio, señal de fin y protocolo de No Show.','Mesas VIP con asignación fija confirmada antes de abrir; mesas estándar con rotación según scheduler.','Registrar en tiempo real: No Shows, cambios de mesa autorizados, solicitudes adicionales y problemas técnicos del scheduler.','Mantener coffee break disponible y continuo durante las sesiones.','Al final de cada jornada: contabilizar reuniones realizadas vs agendadas; reportar al COO y actualizar bitácora.','Habilitar espacio o proceso para que los agentes soliciten reuniones adicionales fuera del scheduler si queda capacidad.'],evidence:'Conteo de reuniones realizadas, No Shows registrados, cambios autorizados y reporte de incidencias técnicas del scheduler por bloque.',control:'El No Show tiene consecuencias definidas desde la convocatoria; el staff no puede modificar esas reglas en campo sin autorización del COO.',deviation:'Falla del scheduler digital: activar agendas exportadas/impresas y registro manual de cambios.'},
+  {id:'eje-05',code:'EJE-05',stage:'eje',title:'Día 2 — Fotografía grupal oficial',owner:'Eventos / Marketing',support:'COO / Fotógrafo',window:'Día 2 · entre bloques de 1:1 (aprox. 12:20–13:00)',type:'puntual',roles:['eventos','marketing','coo'],dep:'F3-03 playera del grupo disponible; F2-03 fotógrafo briefeado.',steps:['Confirmar que todos los asistentes tienen la playera de grupo desde el kit; comunicar con anticipación que la usarán para la foto.','Elegir locación con iluminación natural o artificial adecuada, fondo limpio, sin logotipos de terceros.','Coordinar con el fotógrafo la disposición en filas, el encuadre, la señal de captura y el número de tomas.','Aprovechar el momento para fotos adicionales: directivos, sponsors, nuevos miembros.','Estimar tiempo real de convocatoria, foto y dispersión para no comprometer el inicio del almuerzo.'],evidence:'Fotografía grupal oficial validada en campo (encuadre, enfoque, todos visibles) y fotos adicionales requeridas completadas.',control:'La foto no puede quedar para "después" — es evidencia institucional.',deviation:'Si llueve o la locación falla, usar lobby o salón disponible.'},
+  {id:'eje-06',code:'EJE-06',stage:'eje',title:'Día 2 — Noche libre y actividad social opcional',owner:'Ventas / Eventos',support:'Marketing / COO',window:'Día 2 · noche',type:'puntual',roles:['ventas','eventos','marketing','coo'],steps:['La noche es formalmente libre; sin embargo, Americas Alliance puede facilitar una opción grupal sin costo cubierto o con costo cubierto parcialmente según decisión previa.','Si se ofrece una opción grupal, comunicar con anticipación: venue, hora de salida, costo, punto de retorno y si el transporte está incluido.','No obligar asistencia; quien prefiera otro plan lo hace por su cuenta y sin cobertura de AA.','Si se organiza transporte de ida y vuelta, aplicar el procedimiento F3-02.','No programar actividades protocolares ni compromisos de sponsor en esta noche.'],evidence:'Nota de asistencia (si aplica) y registro de cualquier incidencia reportada.',control:'El consumo de alcohol en actividades no organizadas por AA es responsabilidad individual.'},
+  {id:'eje-07',code:'EJE-07',stage:'eje',title:'Día 3 — Cena de gala y ceremonia de reconocimientos',owner:'COO / Marketing / Protocolo',support:'CEO / AV / Eventos / Ventas',window:'Día 3 · noche (aprox. 20:00–23:00)',type:'puntual',roles:['coo','marketing','eventos','ventas'],dep:'F3-04 escaleta final congelada; F1-02 matriz de sponsors verificada; F2-02 menú confirmado; F2-03 AV operativo; listas de premiados validadas.',steps:['Montar salón con configuración de gala: mesas redondas o rectangulares con mantelería, centros de mesa, señalética de mesa, pantalla principal y secundaria, escenario, podio y pista de baile si aplica.','Verificar que cada sponsor tiene su material en posición según contrato.','Ejecutar escaleta en orden: apertura musical, bienvenida institucional, cena, segmentos de reconocimiento, videos de sponsors, discurso del CEO, premiaciones, show artístico y cierre.','Reconocimientos a cubrir: nuevos miembros, visitantes por primera vez, cumpleaños del mes, BPS, trayectoria, sponsors por categoría, Americas Alliance Awards y staff o colaboradores destacados.','Estaciones espejo de buffet para reducir filas; coordinar con hotel señal de apertura y reposición.','Fotógrafo y videógrafo con lista de tomas obligatorias: cada premiación, videos de sponsors ejecutados, foto con cada sponsor en escenario y ambiente general.'],evidence:'Escaleta ejecutada con hora real; fotos de premiaciones y sponsors; video recap de la noche; registro de incidencias.',control:'Ningún premiado puede ser omitido sin autorización previa. Los videos de sponsors se marcan como "ejecutados" solo cuando se confirma que se proyectaron.',deviation:'Retraso en servicio de cena: ajustar segmentos de reconocimiento para no comprometer el show.'},
+  {id:'eje-08',code:'EJE-08',stage:'eje',title:'Torneo de fútbol y grill fest',owner:'Eventos / COO',support:'Marketing / Transporte / Venue externo',window:'Día 4 · mañana (aprox. 10:00–13:00)',type:'puntual',roles:['eventos','coo','marketing'],dep:'F2-01 venue deportivo confirmado; F3-02 transporte; F3-05 seguro y permisos.',steps:['Confirmar el venue deportivo: canchas habilitadas, vestuarios, iluminación si aplica y equipo básico.','Organizar equipos con anticipación (mezclar países o empresas para fomentar integración) y comunicar reglas del torneo.','Montar área de grill fest contigua: parrilla, menú de carnes y acompañamientos, bebidas y mesas.','Contar con primeros auxilios: botiquín, hielo y número de emergencias locales visible.','Habilitar zona de observadores para quienes no juegan.','Fotógrafo de ambiente y momentos de juego.','Coordinar retorno al hotel: hora, unidades, punto de encuentro.'],evidence:'Resultado del torneo, fotos del evento, nota de asistencia y registro de incidencias.',control:'La participación en actividades deportivas es voluntaria.',deviation:'Lesión: activar primeros auxilios y, si requiere atención médica, trasladar a centro de salud.'},
+  {id:'eje-09',code:'EJE-09',stage:'eje',title:'Pool party',owner:'Eventos / COO',support:'Marketing / Hotel o venue externo',window:'Día 4 · tarde (aprox. 14:00–17:00)',type:'puntual',roles:['eventos','coo','marketing'],dep:'F2-01 venue confirmado; F3-02 transporte si es externo.',steps:['Confirmar área de alberca: capacidad, número de camastros o tumbonas, servicio de barras y snacks, música y DJ si aplica.','Comunicar a los asistentes el punto de encuentro, el dress code y si está incluido o tiene costo adicional.','Habilitar área sombreada para quienes no deseen exponerse al sol.','Si es venue externo: coordinar transporte de ida y retorno.','Controlar el aforo si el venue tiene límite; evitar sobrecupo.','Fotógrafo de ambiente; respetar quienes no desean ser fotografiados.'],evidence:'Fotos de ambiente y nota de asistencia.',control:'Aplicar FT-05 (seguridad con alcohol).',deviation:'Clima adverso: usar área cubierta del venue o del hotel.'},
+  {id:'eje-10',code:'EJE-10',stage:'eje',title:'Fiesta temática de despedida',owner:'COO / Eventos / Marketing',support:'AV / Producción / Venue',window:'Día 4 · noche (aprox. 20:00–23:00)',type:'puntual',roles:['coo','eventos','marketing'],dep:'F2-01 venue confirmado; F2-02 show contratado; F3-04 protocolo de cierre; F1-02 sponsor de la fiesta.',steps:['El tema de la fiesta (Halloween, Día de Muertos, tropical, décadas, etc.) se define en la fase de producción y no se cambia en el último momento.','Montar decoración temática, señalética, photobooth o instalación fotográfica y pista de baile.','Preparar show o entretenimiento según el tema: DJ, grupo en vivo, performance, concurso de disfraces.','Habilitar barra y servicio de alimentos ligeros o botanas; verificar opciones sin alcohol.','Ejecutar agradecimiento institucional breve (5 min máximo) al inicio: CEO o COO cierra el programa oficial.','Fotógrafo y videógrafo de ambiente.','Coordinar retorno al hotel: último autobús o indicar que el regreso es individual.'],evidence:'Fotos y video de la fiesta, nota de asistencia y registro de incidencias.',control:'El anuncio de la próxima sede solo se hace si está formalmente aprobado por el CEO.',deviation:'Cancelación del show: activar música en vivo o DJ de respaldo.'},
+  {id:'eje-11',code:'EJE-11',stage:'eje',title:'Día 5 — Check-out y retorno',owner:'Ventas / Eventos',support:'Hotel / COO / Finanzas',window:'Día 5 · jornada de salida',type:'puntual',roles:['ventas','eventos','coo','finanzas'],dep:'F1-04 rooming list con fechas de salida; F3-02 traslados de salida.',steps:['Comunicar con anticipación a los asistentes el horario de check-out del hotel, opciones de guardar equipaje y dónde recoger.','Mantener una mesa o punto de atención de AA durante la mañana para resolver dudas, cargos adicionales o incidencias.','Coordinar con el hotel la entrega de llaves, revisión de habitaciones y liquidación de consumos extras a cargo del asistente.','Ofrecer traslados al aeropuerto según lo contratado y comunicado; verificar manifiestos y horarios de vuelo críticos.','Iniciar conciliación de habitaciones con el hotel: noches reales, no-shows, early departures y cargos a cobrar.','Recoger materiales de AA que hayan quedado en salones o áreas: banners, pendones, equipo prestado, kits sobrantes.','Hacer recorrido de salida con el hotel para verificar estado de las instalaciones y registrar cualquier daño antes de salir.','El último miembro del equipo en salir lleva la bitácora firmada del día y los materiales residuales.'],evidence:'Conciliación inicial de habitaciones, lista de traslados ejecutados, inventario de materiales recuperados y acta de salida del venue.',control:'No abandonar el hotel sin haber cerrado la cuenta preliminar y sin que el COO haya confirmado que no hay asistentes con problemas pendientes.',deviation:'Cargo indebido del hotel: documentar y escalar a COO antes de pagar; no abonar sin autorización.'},
+
+  {id:'pos-01',code:'POS-01',stage:'pos',title:'Conciliación de hotel, proveedores y cuentas',owner:'Administración / COO',support:'Ventas / CEO',window:'T+1 a T+7 días',type:'puntual',roles:['finanzas','coo','ventas'],steps:['Solicitar facturas finales de hotel, transporte, shows, catering, AV y material.','Comparar factura con contrato, extras autorizados, servicios realmente prestados y depósitos.','Identificar adeudos de clientes, cargos imprevistos, no-shows, salidas anticipadas y créditos potenciales.','Negociar ajustes justificables con el proveedor sin prometer reembolso al agente antes de autorización.','Registrar saldo neto, responsable y fecha de regularización de cada excepción.'],evidence:'Conciliación final de ingresos-egresos y lista de excepciones autorizadas.',control:'Todo crédito a una próxima edición debe quedar por escrito, valorado, identificado y aprobado.',deviation:'Disputa contractual: documentar evidencias y elevar a asesoría/CEO.'},
+  {id:'pos-02',code:'POS-02',stage:'pos',title:'Agradecimientos a sponsors, proveedores y aliados',owner:'Marketing',support:'Ventas / CEO',window:'T+1 a T+10 días',type:'puntual',roles:['marketing','ventas'],dep:'F1-02 sponsors / lista interna de edición.',steps:['Partir de un listado oficial validado, no de memoria de miembros del staff.','Separar patrocinadores por categoría de proveedores y colaboradores, sin omitir contribuciones individuales.','Verificar grafía de nombres y empresas, etiquetas, categoría y relación comercial.','Preparar piezas por sponsor y agradecimientos institucionales, respetando prioridades contractuales.','Publicar con enlace de evidencia y registrar fecha y alcance cuando se mida.'],evidence:'Matriz de agradecimientos cerrada y publicaciones archivadas.',control:'Validación cruzada Ventas + Marketing y aprobación del COO para evitar omisiones.',deviation:'Error publicado: corrección inmediata y comunicación personalizada al afectado.'},
+  {id:'pos-03',code:'POS-03',stage:'pos',title:'Galería, video recap y comunicación postevento',owner:'Marketing / Audiovisual',support:'Ventas / COO',window:'T+3 a T+20 días',type:'puntual',roles:['marketing','coo','ventas'],steps:['Recibir archivos originales y hacer doble respaldo.','Clasificar fotos por día y actividad (cóctel, inauguración, 1:1, grupo, gala, fútbol, pool, despedida).','Eliminar duplicados, fotos mal enfocadas y materiales con restricciones de difusión.','Publicar galería en plataforma accesible, verificar permisos de acceso y comunicar enlace.','Editar video resumen y clips de sponsors con validación de logos y promesas.','Guardar originales, versiones publicadas y material reutilizable para futuras promociones.'],evidence:'Galería pública/compartida y video recap con enlaces y copias de respaldo.',control:'No asumir que todo material capturado es publicable; verificar consentimiento y conveniencia.'},
+  {id:'pos-04',code:'POS-04',stage:'pos',title:'Resultados y rueda de prensa de cierre',owner:'Marketing',support:'CEO / COO / Ventas',window:'T+7 a T+20 días',type:'puntual',roles:['marketing','coo','ventas'],dep:'POS-01 conciliación y listas.',steps:['Validar con Finanzas/Ventas asistentes reales, empresas, países, patrocinadores y logros documentables.','Preparar comunicado de resultados, fotografías clave y mensajes del CEO.','Convocar medios locales, estatales y nacionales según relevancia.','Ejecutar rueda de prensa y registrar preguntas y cobertura.','Compartir resumen con miembros y patrocinadores y conservar evidencia.'],evidence:'Comunicado aprobado, lista de medios y reporte de cobertura.',control:'No publicar cifras no conciliadas ni prometer negocios cerrados por terceros sin su autorización.'},
+  {id:'pos-05',code:'POS-05',stage:'pos',title:'Evaluación, lecciones aprendidas y cierre formal',owner:'COO',support:'Todas las áreas',window:'T+15 a T+30 días',type:'puntual',roles:['coo','ventas','marketing','sistemas','finanzas','eventos'],dep:'POS-01 a POS-04.',steps:['Consolidar presupuesto versus real, participación versus proyección y cumplimiento de sponsor.','Analizar ausencias/no-show, utilización de transporte, desempeño hotelero, tiempos y errores.','Solicitar retroalimentación estructurada al equipo, participantes y sponsors con preguntas breves y comparables.','Clasificar incidencias por causa raíz, impacto y acción preventiva.','Generar plan de mejoras con dueño y fecha, actualizar manual y anexos luego de aprobación.','Presentar informe final al CEO y archivar documentación definitiva.'],evidence:'Informe final con KPIs, evidencias, costos y plan de acciones correctivas; aprobación del CEO.',control:'El evento se cierra cuando excepciones y compromisos tengan responsable, solución y fecha.'},
+];
+
+// ── State ──────────────────────────────────────────
+let currentStage='home', currentRole='all', checks={};
+function saveChecks(){try{localStorage.setItem('aa_v3',JSON.stringify(checks));}catch(e){}}
+function loadChecks(){try{const d=localStorage.getItem('aa_v3');if(d)checks=JSON.parse(d);}catch(e){}}
+loadChecks();
+
+function stageColor(id){const s=STAGES.find(x=>x.id===id);return s?s.color:'var(--indigo)';}
+function typeBadge(type){
+  if(type==='puntual')return'<span class="badge badge-type puntual">⚡ PUNTUAL</span>';
+  return'<span class="badge badge-type">↻ CONTINUO</span>';
+}
+
+// ── Render nav ─────────────────────────────────────
+function renderNav(){
+  const nav=document.getElementById('topnav');
+  nav.innerHTML='<div id="brand" aria-label="Americas Alliance Manual"><div class="dot" aria-hidden="true"></div>AA Manual</div>';
+  STAGES.forEach(s=>{
+    const btn=document.createElement('button');
+    btn.className='nav-btn'+(currentStage===s.id?' active':'');
+    btn.style.setProperty('--phase-color',s.color);
+    btn.dataset.action='go';
+    btn.dataset.stage=s.id;
+    btn.setAttribute('aria-current', currentStage===s.id?'page':'false');
+    btn.innerHTML=`<span class="icon" aria-hidden="true">${s.icon}</span><span>${s.label}</span>${s.hint?`<span class="hint">${s.hint}</span>`:''}`;
+    nav.appendChild(btn);
+  });
+}
+
+// ── Role bar ───────────────────────────────────────
+function renderRoleBar(){
+  document.querySelectorAll('.role-btn').forEach(b=>{
+    const active=b.dataset.role===currentRole;
+    b.classList.toggle('active',active);
+    b.setAttribute('aria-pressed',active?'true':'false');
+  });
+}
+
+// ── Role counts ────────────────────────────────────
+function updateRoleCounts(){
+  const roles=['all','coo','ventas','marketing','sistemas','finanzas','eventos'];
+  const stageProcs=PROCS.filter(p=>p.stage===currentStage);
+  roles.forEach(r=>{
+    const el=document.getElementById('rc-'+r);
+    if(!el)return;
+    if(stageProcs.length===0){el.textContent='';return;}
+    const count=r==='all'?stageProcs.length:stageProcs.filter(p=>p.roles.includes(r)).length;
+    el.textContent=count>0?count:'';
+  });
+}
+
+// ── Render proc card ───────────────────────────────
+function renderProc(p){
+  const c=stageColor(p.stage);
+  const isVisible=currentRole==='all'||p.roles.includes(currentRole);
+  const done=p.steps.filter((_,i)=>checks[p.id+'-'+i]).length;
+  const pct=p.steps.length>0?Math.round(done/p.steps.length*100):0;
+
+  const stepsHtml=p.steps.map((s,i)=>{
+    const k=p.id+'-'+i;
+    const isDone=!!checks[k];
+    return`<div class="check-item">
+      <input type="checkbox" data-action="toggleCheck" data-check="${k}" ${isDone?'checked':''} aria-label="${s.substring(0,60)}">
+      <span class="check-label${isDone?' checked':''}">${s}</span>
+    </div>`;
+  }).join('');
+
+  let html=`<article class="proc-card${isVisible?'':' hidden'}" id="card-${p.id}" style="--c:${c}">
+    <div class="proc-header" data-action="go" data-stage="${p.id}-toggle" role="button" tabindex="0" aria-expanded="false">
+      <div class="proc-meta">
+        <div class="proc-code">${p.code}</div>
+        <div class="proc-title">${p.title}</div>
+        <div class="proc-info">
+          <span class="badge badge-owner">${p.owner}</span>
+          <span class="badge badge-window">${p.window}</span>
+          ${typeBadge(p.type)}
+        </div>
+        ${p.steps.length>0?`<div class="progress-wrap"><div class="progress-label"><span>Progreso</span><span>${pct}%</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div></div>`:''}
+      </div>
+      <div class="proc-toggle" aria-hidden="true">▸</div>
+    </div>
+    <div class="proc-body" id="body-${p.id}">`;
+
+  if(p.dep) html+=`<div class="dep-box">⤷ <strong>Entrada:</strong> ${p.dep}</div>`;
+  if(p.hitos) html+=`<div class="hitos-box"><strong>Hitos:</strong> ${p.hitos}</div>`;
+
+  html+=`<div class="steps-list"><div class="steps-label">Pasos</div>${stepsHtml}</div>`;
+  html+=`<div class="meta-grid">`;
+  html+=`<div class="meta-box full"><h4>Evidencia de cierre</h4><p>${p.evidence}</p></div>`;
+  if(p.control) html+=`<div class="meta-box"><h4>Punto de control</h4><p>${p.control}</p></div>`;
+  if(p.deviation) html+=`<div class="meta-box warn"><h4>Si hay desviación</h4><p>${p.deviation}</p></div>`;
+  html+=`</div></div></article>`;
+  return html;
+}
+
+// ── Render stage ───────────────────────────────────
+function renderStage(){
+  const main=document.getElementById('main');
+  if(currentStage==='home'){renderHome(main);return;}
+  if(currentStage==='gov'){renderGov(main);return;}
+  if(currentStage==='ft'){renderFT(main);return;}
+  if(currentStage==='kpi'){renderKPI(main);return;}
+  if(currentStage==='anexos'){renderAnexos(main);return;}
+
+  const st=STAGES.find(s=>s.id===currentStage);
+  if(!st){main.innerHTML='';return;}
+  const procs=PROCS.filter(p=>p.stage===currentStage);
+  const gate=GATES[currentStage];
+  const desc=PHASE_DESC[currentStage]||'';
+
+  let html=`<div class="section-header"><h2>${st.icon} ${st.label}</h2><p>${desc}</p></div>`;
+  if(gate) html+=`<div class="gate-box"><span class="lock" aria-hidden="true">🔒</span><p><strong>PUERTA DE SALIDA:</strong> ${gate}</p></div>`;
+  if(procs.length===0){
+    html+=`<p style="color:var(--text3);font-size:14px;margin-top:20px;font-weight:500">Sin procedimientos en esta sección.</p>`;
+  } else {
+    html+=`<div class="proc-grid">`;
+    procs.forEach(p=>{html+=renderProc(p);});
+    html+=`</div>`;
+  }
+  main.innerHTML=html;
+}
+
+// ── Home ───────────────────────────────────────────
+function renderHome(main){
+  const phases=[
+    {id:'gov',label:'Gobernanza y Autoridad',desc:'Organigrama, reglas y paquete documental',icon:'◈',c:'var(--gov)'},
+    {id:'f0',label:'F0 — Estrategia y Decisión',desc:'T-12 a T-9m · 3 procedimientos',icon:'◉',c:'var(--f0)'},
+    {id:'f1',label:'F1 — Diseño y Lanzamiento',desc:'T-9 a T-6m · 5 procedimientos',icon:'◉',c:'var(--f1)'},
+    {id:'f2',label:'F2 — Producción y Contratación',desc:'T-6 a T-3m · 3 procedimientos',icon:'◉',c:'var(--f2)'},
+    {id:'f3',label:'F3 — Preparación Operativa',desc:'T-3m a T-30d · 5 procedimientos',icon:'◉',c:'var(--f3)'},
+    {id:'f4',label:'F4 — Preparación Final',desc:'T-30d a T-0 · 3 procedimientos',icon:'◉',c:'var(--f4)'},
+    {id:'eje',label:'F5 — Operación',desc:'T-0 a T+1d · 12 procedimientos',icon:'◎',c:'var(--eje)'},
+    {id:'ft',label:'FT Capa Transversal',desc:'Permanente · Calidad, seguridad e incidencias',icon:'◧',c:'var(--ft)'},
+    {id:'pos',label:'F6 — Cierre y Postevento',desc:'T+1 a T+30d · 5 procedimientos',icon:'◉',c:'var(--pos)'},
+    {id:'kpi',label:'KPIs y RACI',desc:'Indicadores y matriz de responsabilidades',icon:'▤',c:'var(--kpi)'},
+    {id:'anexos',label:'Anexos',desc:'Formatos, Playa del Carmen 2026, Sponsors',icon:'◫',c:'var(--kpi)'},
+  ];
+  let html=`<div class="home-hero">
+    <div class="home-badge">v0.3 · Noviembre 2026</div>
+    <h1>Manual Maestro de<br><span>Organización y Operación</span></h1>
+    <p>Americas Alliance · Conferencia Anual · ANTICIPACIÓN · EJECUCIÓN · CIERRE</p>
+  </div>
+  <div class="phase-grid">`;
+  phases.forEach(p=>{
+    html+=`<div class="phase-card" style="--c:${p.c}" data-action="go" data-stage="${p.id}" role="button" tabindex="0" aria-label="${p.label}">
+      <span class="icon" aria-hidden="true">${p.icon}</span>
+      <h3>${p.label}</h3>
+      <p>${p.desc}</p>
+    </div>`;
+  });
+  html+=`</div>`;
+  main.innerHTML=html;
+}
+
+// ── Gov ────────────────────────────────────────────
+function renderGov(main){
+  main.innerHTML=`<div class="section-header">
+    <h2>◈ Gobierno, Autoridad y Responsabilidades</h2>
+    <p>Marco de gobernanza permanente. Aplica en todas las fases.</p>
+  </div>
+
+  <div class="info-card">
+    <h3>2.1 Organigrama funcional</h3>
+    <table class="data-table">
+      <thead><tr><th>Cargo / función</th><th>Responsabilidad rectora</th><th>Decide / escalamiento</th></tr></thead>
+      <tbody>
+        <tr><td>CEO · Dirección General</td><td>Estrategia, objetivos, representación institucional, compromisos mayores.</td><td>Aprueba sede, presupuesto, contratos y excepciones relevantes.</td></tr>
+        <tr><td>COO · Dirección de Operaciones</td><td>Dirección integral de planificación, logística, proveedores y ejecución.</td><td>Autoriza cambios operativos dentro de delegación; eleva costos y riesgos al CEO.</td></tr>
+        <tr><td>Ventas / Relaciones con Miembros</td><td>Inscripciones, participantes, patrocinadores, contacto uno a uno, seguimiento comercial.</td><td>Propone tarifas y condiciones; confirma venta y gestiona incidencias comerciales.</td></tr>
+        <tr><td>Marketing y Comunicación</td><td>Marca, promociones, medios, redes, cobertura y agradecimientos.</td><td>Aprueba piezas dentro del mensaje acordado; eleva promesas de patrocinio.</td></tr>
+        <tr><td>Sistemas / Soporte Tecnológico</td><td>Web, inscripciones, scheduler, generación y respaldo de agendas.</td><td>Resuelve incidencias del sistema; coordina cambios que alteren reuniones.</td></tr>
+        <tr><td>Administración / Finanzas</td><td>Facturación, cobros, pagos, impuestos, conciliación y autorizaciones.</td><td>No procesa pagos fuera del marco aprobado; escala diferencias.</td></tr>
+        <tr><td>Staff de Eventos / Registro</td><td>Montaje, kits, registro, anfitrionía, control de accesos e incidencias.</td><td>Ejecuta instrucciones del jefe de actividad; escala al COO.</td></tr>
+        <tr><td>Producción audiovisual / Proveedores</td><td>Montaje AV, foto/video, transporte, shows, catering, decoración.</td><td>Cumple alcance contratado; sin cambios de costo sin aprobación.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-card">
+    <h3>2.2 Reglas de autoridad</h3>
+    <ul>
+      <li>CEO: máxima autoridad sobre presupuesto final, sede, compromisos relevantes, representación y decisiones excepcionales.</li>
+      <li>COO: dueño del plan maestro y punto único de integración entre áreas; valida los servicios antes de ejecutarlos.</li>
+      <li>Cada actividad tiene un Responsable Operativo Único (ROU); el apoyo de varias áreas no elimina esa titularidad.</li>
+      <li>Ningún proveedor puede interpretar una solicitud informal como autorización de gasto adicional.</li>
+      <li>Toda modificación de agenda debe circular desde un único documento vigente, con hora y versión.</li>
+    </ul>
+    <p style="margin-top:12px;font-size:12px;color:var(--amber2);">⚠️ PROPUESTA PARA VALIDAR: Definir umbrales monetarios de aprobación, personas titulares/suplentes y quién representa Administración/Sistemas cuando no haya una posición dedicada.</p>
+  </div>
+
+  <div class="info-card">
+    <h3>2.3 Paquete documental de cada edición</h3>
+    <p>Crear una carpeta maestra con: acta de apertura, agenda y cronograma, presupuesto, contratos, rooming list, base de asistentes, matriz de patrocinadores, inventario, plan de transporte, planos, escaletas, material audiovisual, checklists, incidencias, cierre financiero y lecciones aprendidas. Cada archivo debe mostrar responsable, fecha de actualización y versión.</p>
+  </div>
+
+  <div class="gate-box"><span class="lock" aria-hidden="true">📋</span><p><strong>Control de cambios:</strong> Toda alteración de alcance, costo, aforo, horario, ubicación, proveedor o derecho comercial se registra como solicitud de cambio. El COO estima impacto; el CEO decide cuando excede la delegación. Después se actualizan todos los documentos afectados y se comunica a las personas necesarias.</p></div>`;
+}
+
+// ── FT ─────────────────────────────────────────────
+function renderFT(main){
+  main.innerHTML=`<div class="section-header">
+    <h2>◧ Capa Transversal — Calidad, Seguridad e Incidencias</h2>
+    <p>Activa desde F0 hasta F6. Debe leerse antes de la primera reunión de planificación.</p>
+  </div>
+
+  <div class="ft-card">
+    <h3>FT-01 · Rutina de control diario (durante el evento)</h3>
+    <ul>
+      <li>60–90 minutos antes del primer servicio: reunión operativa de 10–15 minutos dirigida por COO; agenda, proveedores, clima, asistentes, riesgos, materiales y transportes.</li>
+      <li>Antes de abrir cada actividad: jefe de actividad firma verificación de AV, aforo, mesa de control, menús, sponsor y transporte.</li>
+      <li>Durante: un enlace de staff por actividad reporta cambio de horario, falla de AV, ausencias y faltantes.</li>
+      <li>Cierre: registrar hora real, diferencias de aforo, promesas comerciales ejecutadas, costos adicionales y acciones del día siguiente.</li>
+      <li>Marketing respalda y publica material autorizado, con etiquetas de patrocinadores y fotos correctas.</li>
+    </ul>
+  </div>
+
+  <div class="ft-card">
+    <h3>FT-02 · Sistema de incidencias</h3>
+    <table class="severity-table">
+      <thead><tr><th>Severidad</th><th>Ejemplos</th><th>Decisión / respuesta</th></tr></thead>
+      <tbody>
+        <tr><td><strong style="color:#f43f5e">Crítica</strong></td><td>Emergencia médica; seguridad; suspensión de actividad; incumplimiento legal.</td><td>Parar actividad cuando proceda, activar emergencias/sede, informar COO y CEO.</td></tr>
+        <tr><td><strong style="color:#f59e0b">Alta</strong></td><td>Video/mención de sponsor omitido; sala One-to-One no operativa; autobús insuficiente; proveedor ausente.</td><td>COO designa solución inmediata, comunica a afectado y documenta.</td></tr>
+        <tr><td><strong style="color:#fbbf24">Media</strong></td><td>Demora de 10–20 min; faltante de kit; fila prolongada en buffet.</td><td>Jefe de actividad corrige y reporta en cierre diario.</td></tr>
+        <tr><td><strong style="color:var(--text3)">Baja</strong></td><td>Error menor en señalética; solicitud individual no crítica.</td><td>Staff resuelve o agenda acción en bitácora.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ft-card">
+    <h3>FT-03 · Registro mínimo de una incidencia</h3>
+    <p>Hora y lugar · actividad · reportante · descripción factual · impacto · responsable · medidas inmediatas · comunicación emitida · costo/implicación contractual · cierre/evidencia · aprendizaje.</p>
+  </div>
+
+  <div class="ft-card">
+    <h3>FT-04 · Protocolo de comunicación y privacidad</h3>
+    <ul>
+      <li>Solo Marketing o vocero autorizado difunde información institucional.</li>
+      <li>Las listas de asistentes, teléfonos, datos de vuelo, dietas y habitaciones se comparten únicamente por necesidad operativa.</li>
+      <li>El grupo social no sustituye un canal de crisis.</li>
+      <li>Fotografías y testimonios deben respetar autorizaciones y objeciones de los participantes.</li>
+    </ul>
+  </div>
+
+  <div class="ft-card">
+    <h3>FT-05 · Seguridad de eventos con alcohol, deporte y entretenimiento</h3>
+    <ul>
+      <li>No servir alcohol sin identificación de mayoría de edad cuando el contexto lo exija.</li>
+      <li>Contar con primeros auxilios y número de emergencias locales en cada actividad deportiva.</li>
+      <li>Shows de fuego, pirotecnia o efectos especiales requieren proveedor habilitado, distancias de seguridad aprobadas y permiso firmado.</li>
+      <li>Comunicar política de consumo responsable de alcohol sin crear presión de consumo.</li>
+      <li>Supervisar que el retorno en transporte no quede comprometido por el consumo de los asistentes.</li>
+    </ul>
+  </div>`;
+}
+
+// ── KPI ────────────────────────────────────────────
+function renderKPI(main){
+  main.innerHTML=`<div class="section-header">
+    <h2>▤ Indicadores, RACI y Lecciones Aprendidas</h2>
+    <p>R= ejecuta; A= aprueba/rinde cuenta; C= consultado; I= informado.</p>
+  </div>
+
+  <div class="anexo-section">
+    <h3>12. Matriz de Responsabilidades y Entregables</h3>
+    <table class="data-table">
+      <thead><tr><th>Proceso</th><th>R (dueño de ejecución)</th><th>A (aprobación)</th><th>C / I</th></tr></thead>
+      <tbody>
+        <tr><td>Sede, hotel y contratos</td><td>COO</td><td>CEO</td><td>Finanzas / Ventas</td></tr>
+        <tr><td>Presupuesto y flujo</td><td>COO + Finanzas</td><td>CEO</td><td>Ventas / Marketing</td></tr>
+        <tr><td>Convocatoria y tarifas</td><td>Ventas</td><td>CEO / COO</td><td>Marketing / Finanzas</td></tr>
+        <tr><td>Patrocinios</td><td>Ventas</td><td>CEO / COO</td><td>Marketing / COO</td></tr>
+        <tr><td>Redes, prensa y piezas</td><td>Marketing</td><td>COO</td><td>Ventas / CEO</td></tr>
+        <tr><td>Scheduler y mesas</td><td>Sistemas + Eventos</td><td>COO</td><td>Ventas</td></tr>
+        <tr><td>Kits, credenciales, impresión</td><td>Eventos + Marketing</td><td>COO</td><td>Sistemas / Proveedores</td></tr>
+        <tr><td>Transporte y sedes externas</td><td>Eventos</td><td>COO</td><td>Ventas / Hotel</td></tr>
+        <tr><td>Audio, videos y shows</td><td>Producción / Eventos</td><td>COO</td><td>Marketing / sponsors</td></tr>
+        <tr><td>Protocolo y premiaciones</td><td>Marketing + Eventos</td><td>CEO / COO</td><td>Ventas</td></tr>
+        <tr><td>Registro y anfitrionía</td><td>Eventos</td><td>COO</td><td>Ventas / Hotel</td></tr>
+        <tr><td>Gala y despedida</td><td>COO / Eventos</td><td>CEO (estratégico)</td><td>Marketing / Proveedores</td></tr>
+        <tr><td>Cobertura y galería</td><td>Marketing</td><td>COO</td><td>Audiovisual</td></tr>
+        <tr><td>Cobros, pagos, créditos</td><td>Finanzas</td><td>CEO según importe</td><td>COO / Ventas</td></tr>
+        <tr><td>Informe y mejora continua</td><td>COO</td><td>CEO</td><td>Todas las áreas</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="anexo-section">
+    <h3>13. Indicadores y Lecciones Aprendidas</h3>
+    <table class="data-table">
+      <thead><tr><th>Indicador</th><th>Cálculo / observación</th><th>Propietario</th></tr></thead>
+      <tbody>
+        <tr><td>Asistencia real</td><td>Asistentes registrados / confirmados.</td><td>Ventas / Eventos</td></tr>
+        <tr><td>Ocupación bloque hotel</td><td>Noches vendidas / noches contratadas o bloqueadas.</td><td>Ventas / COO</td></tr>
+        <tr><td>Reuniones realizadas</td><td>Realizadas / agendadas, No Show separado.</td><td>Sistemas / Ventas</td></tr>
+        <tr><td>Cumplimiento sponsors</td><td>Beneficios entregados y documentados / comprometidos.</td><td>Marketing / Ventas</td></tr>
+        <tr><td>Puntualidad</td><td>Actividades que comenzaron conforme a agenda / total.</td><td>COO</td></tr>
+        <tr><td>Transporte</td><td>Pasajeros abordados / plazas pagadas, por actividad.</td><td>Eventos</td></tr>
+        <tr><td>Costos</td><td>Real frente a presupuesto aprobado por categoría.</td><td>Finanzas</td></tr>
+        <tr><td>Cierre de cobranza</td><td>Cobrado antes del evento / ingreso contratado.</td><td>Finanzas</td></tr>
+        <tr><td>Publicaciones</td><td>Piezas publicadas a tiempo / programadas.</td><td>Marketing</td></tr>
+        <tr><td>Satisfacción</td><td>Encuesta breve y evaluación por actividad.</td><td>Marketing / Ventas</td></tr>
+        <tr><td>Incidencias</td><td>Número, severidad, tiempo de resolución y reincidencia.</td><td>COO</td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ── Anexos ─────────────────────────────────────────
+function renderAnexos(main){
+  main.innerHTML=`<div class="section-header">
+    <h2>◫ Anexos y Formatos Mínimos</h2>
+    <p>Versión 0.3 · Referencia permanente para todas las ediciones.</p>
+  </div>
+
+  <div class="anexo-section">
+    <h3>14.1 Controles operativos de uso obligatorio</h3>
+    <table class="data-table">
+      <thead><tr><th>Código</th><th>Formato / registro</th><th>Momento y propietario</th></tr></thead>
+      <tbody>
+        <tr><td>F-01</td><td>Ficha de edición y presupuesto base</td><td>Apertura · COO</td></tr>
+        <tr><td>F-02</td><td>Comparativo de hoteles y riesgo contractual</td><td>Selección · COO</td></tr>
+        <tr><td>F-03</td><td>Registro de contratos, pagos y anticipos</td><td>Preparación / cierre · Finanzas</td></tr>
+        <tr><td>F-04</td><td>Rooming list conciliada</td><td>Semanal y diario · Ventas COO</td></tr>
+        <tr><td>F-05</td><td>Base de participantes / registro / invitados</td><td>Toda edición · Ventas</td></tr>
+        <tr><td>F-06</td><td>Matriz de patrocinadores y beneficios con evidencia</td><td>Venta → post · Ventas/Marketing</td></tr>
+        <tr><td>F-07</td><td>Plan de marketing con calendarios y etiquetas</td><td>Antes/durante/después · Marketing</td></tr>
+        <tr><td>F-08</td><td>Comparativo de proveedores, riders y seguros</td><td>Selección · COO</td></tr>
+        <tr><td>F-09</td><td>Inventario de kits y materiales por día</td><td>Entrega · Eventos</td></tr>
+        <tr><td>F-10</td><td>Agenda One-to-One, mesas VIP y picos</td><td>T-30 a ejecución · Sistemas</td></tr>
+        <tr><td>F-11</td><td>Listas de asistentes a eventos y manifiestos de bus</td><td>Cada salida · Eventos</td></tr>
+        <tr><td>F-12</td><td>Escaleta minuto a minuto / videos / discursos</td><td>Cada protocolo · Marketing</td></tr>
+        <tr><td>F-13</td><td>Checklist Go/No-Go de actividad</td><td>Antes de abrir · Jefe de actividad</td></tr>
+        <tr><td>F-14</td><td>Bitácora de incidencias y decisiones</td><td>Durante · COO</td></tr>
+        <tr><td>F-15</td><td>Conciliación postevento y créditos</td><td>Cierre · Finanzas</td></tr>
+        <tr><td>F-16</td><td>Matriz de agradecimientos y publicaciones</td><td>Postevento · Marketing</td></tr>
+        <tr><td>F-17</td><td>Galería / inventario de fotos y videos</td><td>Postevento · Marketing</td></tr>
+        <tr><td>F-18</td><td>Informe final y plan de mejora</td><td>T+30 · COO</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="anexo-section">
+    <h3>14.2 Plantilla de minuto a minuto</h3>
+    <table class="minuto-table">
+      <thead><tr><th>Hora</th><th>Acción / señal</th><th>Responsable</th><th>Evidencia de ejecución</th></tr></thead>
+      <tbody>
+        <tr><td>-60 min</td><td>Revisión de montaje, aforo, seguridad y AV</td><td>COO / Jefe actividad</td><td>Checklist previo</td></tr>
+        <tr><td>-30 min</td><td>Ensayo de discursos y videos / prueba de micrófonos</td><td>Marketing / AV COO</td><td>Lista reproducción probada</td></tr>
+        <tr><td>-10 min</td><td>Staff en posiciones / llegada de sponsors</td><td>Eventos COO</td><td>Confirmación por radio/chat</td></tr>
+        <tr><td>00:00</td><td>Apertura / anuncio institucional</td><td>Presentador</td><td>Inicio real anotado</td></tr>
+        <tr><td>Variable</td><td>Discursos y beneficios sponsors según contrato</td><td>Protocolo</td><td>Cada ítem marcado</td></tr>
+        <tr><td>Variable</td><td>Interacción / show / comida</td><td>Producción / Hotel COO</td><td>Servicio verificado</td></tr>
+        <tr><td>Cierre</td><td>Agradecimiento, regreso y desmontaje</td><td>Jefe actividad</td><td>Acta final e incidencias</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="anexo-section">
+    <h3>14.3 Checklist de liberación por actividad</h3>
+    <div class="info-box">
+      <ul>
+        <li>Sede confirmada y habilitada; aforo respetado; permisos revisados.</li>
+        <li>Recursos AV probados y archivos respaldados; operador identificado.</li>
+        <li>Menú, servicio y bebidas aprobados; restricciones especiales contempladas.</li>
+        <li>Matriz de sponsor en mano; logos, banners, videos y discursos marcados.</li>
+        <li>Staff en posiciones, accesos y punto de información funcionando.</li>
+        <li>Transporte de ida/regreso y confirmados conciliados cuando aplica.</li>
+        <li>Plan de contingencia y teléfonos de emergencia disponibles.</li>
+        <li>Responsable operativo autoriza apertura; COO resuelve bloqueadores críticos.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="anexo-section">
+    <h3>Anexo A — Caso de referencia: Playa del Carmen 2026</h3>
+    <div class="info-box" style="margin-bottom:10px"><strong>Naturaleza del anexo:</strong> Caso real relatado por la organización y contrastado con el cartel de agenda. Sirve para dar escala y visualizar dependencias; no fija obligatoriamente días, sedes ni actividades futuras.</div>
+    <table class="data-table">
+      <thead><tr><th>Fecha</th><th>Programa comunicado</th><th>Observaciones de operación</th></tr></thead>
+      <tbody>
+        <tr><td>27 oct</td><td>Día previo no oficial: cena de integración.</td><td>Grupo aproximado de 30 personas en La Bodeguita del Medio; separar mensaje social de oficial.</td></tr>
+        <tr><td>28 oct</td><td>Llegada; entrega de kits 15:00–17:00; Welcome Cocktail 20:00–23:00.</td><td>Check-in especial, mesa de tours y pared gráfica. Noche mexicana: cóctel del host sponsor, honores, reconocimientos, mariachi.</td></tr>
+        <tr><td>29 oct</td><td>08:00–09:00 acreditación; 09:00–09:30 inauguración; 09:40–12:20 One-to-One; 12:21–13:00 foto; 13:00–14:00 comida; 14:20–17:00 One-to-One; noche libre.</td><td>Corte de listón, mesas VIP, café permanente y foto con playera; visita voluntaria a Coco Bongo, consumo propio.</td></tr>
+        <tr><td>30 oct</td><td>09:00–13:00 One-to-One; 13:00–14:00 comida; 14:20–17:00 One-to-One; 20:00–23:00 gala.</td><td>Doble estación de buffet, premiaciones, video sponsors, alfombra roja, photobooth; after en bar del hotel.</td></tr>
+        <tr><td>31 oct</td><td>10:00–13:00 torneo de fútbol y grill fest; 14:00–17:00 pool party; 20:00–23:00 Día de Muertos.</td><td>Estadio Mario Villanueva, parrillada; despedida en Inti Beach Club con decoración, show y retorno.</td></tr>
+        <tr><td>1 nov</td><td>Check-out.</td><td>Atención de salidas, conciliación inicial y traslados.</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box">⚠️ Las horas del calendario de 2026 son las publicadas en la imagen. En narración oral surgieron algunas horas aproximadas distintas; prevalece la agenda visual como referencia oficial.</div>
+  </div>
+
+  <div class="anexo-section">
+    <h3>Anexo B — Referencia de Patrocinadores y Reconocimientos 2026</h3>
+    <div class="info-box" style="margin-bottom:10px">Listado extraído de la hoja SPONSORS-1(2).pdf entregada por la organización. Utilizar solo como ejemplo y cotejar contra contratos y artes originales de cada edición.</div>
+    <table class="data-table">
+      <thead><tr><th>Empresa</th><th>Categoría / actividad</th></tr></thead>
+      <tbody>
+        <tr><td>CEGA Logistics</td><td>Host Sponsor</td></tr>
+        <tr><td>Smart Cargo Solutions</td><td>Diamond Sponsor</td></tr>
+        <tr><td>Impoexporta</td><td>Gold Sponsor</td></tr>
+        <tr><td>Sky Cargo</td><td>Gold Sponsor</td></tr>
+        <tr><td>Akzent Logistics</td><td>Bag Sponsor</td></tr>
+        <tr><td>Ecuainterlogistics</td><td>Welcome Cocktail Sponsor</td></tr>
+        <tr><td>Allianceshares Logistics</td><td>Gala Dinner Sponsor</td></tr>
+        <tr><td>Transtainer</td><td>Coffee Break Sponsor</td></tr>
+        <tr><td>Hanseatica</td><td>Insurance Sponsor</td></tr>
+        <tr><td>Gloshima</td><td>Halloween Sponsor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="anexo-section">
+    <h3>Anexo C — Puntos Abiertos para Revisión del Equipo</h3>
+    <table class="data-table">
+      <thead><tr><th>Tema</th><th>Decisión que deberá tomar el equipo</th></tr></thead>
+      <tbody>
+        <tr><td>Autoridad</td><td>Límites de montos de COO/CEO, firmas y cargos suplentes.</td></tr>
+        <tr><td>Cronograma</td><td>Fechas base realistas por sede: 12 meses vs prácticas históricas de 3/2/1 meses.</td></tr>
+        <tr><td>Hotel</td><td>Política de tarifas, overbooking, cancelaciones, penalidades y pagos desde Americas Alliance.</td></tr>
+        <tr><td>Patrocinios</td><td>Paquetes vigentes: se citan Diamond, Emerald, Gold, Silver; confirmar Platinum y otros niveles históricos.</td></tr>
+        <tr><td>Scheduler</td><td>Aplicación exacta, apertura/cierre, algoritmo de mesas y reglas formales de No Show.</td></tr>
+        <tr><td>Transportes</td><td>Quién contrata/cobra cada traslado, margen de capacidad, no-show y retorno independiente.</td></tr>
+        <tr><td>Audio/video</td><td>Responsable de segundo control de videos y plazos exigibles a productora.</td></tr>
+        <tr><td>Eventos especiales</td><td>Cuáles son obligatorios por edición: fútbol, pool, Halloween, karaoke, visitas técnicas, charlas.</td></tr>
+        <tr><td>Premios</td><td>Criterios documentados de BPS, trayectoria, sponsors y Americas Alliance Awards.</td></tr>
+        <tr><td>Seguridad</td><td>Cobertura de seguro, proveedores con show de fuego, emergencias, política de alcohol.</td></tr>
+        <tr><td>Post</td><td>Plazos contractuales de entrega de galería, video, rueda de prensa e informe financiero.</td></tr>
+        <tr><td>Archivo</td><td>Herramienta oficial para versiones, control de cambios, documentos sensibles y autorizaciones.</td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ── Toggle proc ────────────────────────────────────
+function toggleProc(procId){
+  const body=document.getElementById('body-'+procId);
+  const header=document.querySelector(`#card-${procId} .proc-header`);
+  if(!body)return;
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  if(header) header.setAttribute('aria-expanded',!isOpen);
+  const toggle=document.querySelector(`#card-${procId} .proc-toggle`);
+  if(toggle) toggle.textContent=isOpen?'▸':'▾';
+}
+
+// ── Toggle check ───────────────────────────────────
+function toggleCheck(key,val){
+  checks[key]=val;
+  saveChecks();
+  const label=document.querySelector(`input[data-check="${key}"]`)?.closest('.check-item')?.querySelector('.check-label');
+  if(label) label.classList.toggle('checked',val);
+  const parts=key.split('-');
+  const procId=parts.slice(0,parts.length-1).join('-');
+  const proc=PROCS.find(p=>p.id===procId);
+  if(proc){
+    const done=proc.steps.filter((_,i)=>checks[procId+'-'+i]).length;
+    const pct=Math.round(done/proc.steps.length*100);
+    const fill=document.querySelector('#card-'+procId+' .progress-fill');
+    if(fill) fill.style.width=pct+'%';
+    const lbl=document.querySelector('#card-'+procId+' .progress-label span:last-child');
+    if(lbl) lbl.textContent=pct+'%';
+  }
+}
+
+// ── Navigate ───────────────────────────────────────
+function go(id){
+  if(id&&id.endsWith('-toggle')){
+    toggleProc(id.replace('-toggle',''));
+    return;
+  }
+  currentStage=id;
+  renderNav();
+  renderStage();
+  updateRoleCounts();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── Set role ───────────────────────────────────────
+function setRole(role){
+  currentRole=role;
+  renderRoleBar();
+  PROCS.forEach(p=>{
+    const card=document.getElementById('card-'+p.id);
+    if(!card)return;
+    card.classList.toggle('hidden',role!=='all'&&!p.roles.includes(role));
+  });
+  updateRoleCounts();
+}
+
+// ── Keyboard nav ───────────────────────────────────
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'||e.key===' '){
+    const el=e.target.closest('[data-action="go"],[data-action="setRole"]');
+    if(el){ e.preventDefault(); el.click(); }
+  }
+});
+
+// ── Event delegation ───────────────────────────────
+document.addEventListener('click',function(e){
+  const goEl=e.target.closest('[data-action="go"]');
+  if(goEl){go(goEl.dataset.stage);return;}
+  const roleEl=e.target.closest('[data-action="setRole"]');
+  if(roleEl){setRole(roleEl.dataset.role);return;}
+});
+document.addEventListener('change',function(e){
+  if(e.target.dataset.action==='toggleCheck'){
+    toggleCheck(e.target.dataset.check,e.target.checked);
+  }
+});
+
+// ── Init ───────────────────────────────────────────
+renderNav();
+renderStage();
+updateRoleCounts();
+</script>
+</body>
+</html>
