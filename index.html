@@ -3,42 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Americas Alliance — Manual Maestro Conferencia Anual v0.3</title>
+<title>Manual Maestro Conferencia — v5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
-   DESIGN SYSTEM — UI/UX Pro Max
-   Style: Premium Dark SaaS Dashboard
-   Palette: Deep Slate + Indigo + Amber
+   DESIGN SYSTEM — WHITE / LIGHT MODE
+   Palette: Crisp White + Slate + Indigo + Amber
    Typography: Plus Jakarta Sans
    ═══════════════════════════════════════════════ */
 :root{
-  /* Base surfaces */
+  /* ── LIGHT (default) ── */
+  --bg:       #f0f2f5;
+  --surface0: #ffffff;
+  --surface1: #ffffff;
+  --surface2: #f4f6f9;
+  --surface3: #e8ecf2;
+  --border:   #dde3ed;
+  --border2:  #c8d0de;
+
+  --text1: #0d1424;
+  --text2: #3a4660;
+  --text3: #7a86a0;
+
+  --indigo:   #4f52d9;
+  --indigo2:  #6366f1;
+  --indigo-bg: #eef0fd;
+  --amber:    #d97706;
+  --amber2:   #f59e0b;
+  --amber-bg: #fef3c7;
+  --emerald:  #059669;
+  --emerald-bg: #d1fae5;
+  --rose:     #dc2626;
+  --rose-bg:  #fee2e2;
+  --violet:   #7c3aed;
+  --violet-bg:#ede9fe;
+  --cyan:     #0891b2;
+
+  --gov:  #7c3aed;
+  --f0:   #0891b2;
+  --f1:   #0284c7;
+  --f2:   #059669;
+  --f3:   #d97706;
+  --f4:   #dc2626;
+  --eje:  #4f52d9;
+  --ft:   #7c3aed;
+  --pos:  #047857;
+  --kpi:  #475569;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.06);
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ── DARK MODE ── */
+[data-theme="dark"]{
   --bg:       #0d1117;
+  --surface0: #161b27;
   --surface1: #161b27;
   --surface2: #1e2538;
   --surface3: #262d42;
   --border:   #2a3350;
   --border2:  #364060;
 
-  /* Text */
   --text1: #f0f4ff;
   --text2: #a8b4d0;
   --text3: #64748b;
 
-  /* Accents — phase-agnostic */
   --indigo:   #6366f1;
   --indigo2:  #818cf8;
+  --indigo-bg: rgba(99,102,241,.15);
   --amber:    #f59e0b;
   --amber2:   #fbbf24;
+  --amber-bg: rgba(245,158,11,.12);
   --emerald:  #10b981;
+  --emerald-bg: rgba(16,185,129,.12);
   --rose:     #f43f5e;
-  --cyan:     #06b6d4;
+  --rose-bg:  rgba(244,63,94,.12);
   --violet:   #8b5cf6;
+  --violet-bg: rgba(139,92,246,.15);
 
-  /* Phase colors */
   --gov:  #8b5cf6;
   --f0:   #06b6d4;
   --f1:   #0ea5e9;
@@ -50,13 +101,9 @@
   --pos:  #059669;
   --kpi:  #64748b;
 
-  /* Spacing & radius */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 16px;
-  --r-xl: 20px;
-
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.5);
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -65,11 +112,10 @@ body{
   background: var(--bg);
   color: var(--text1);
   min-height: 100vh;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.65;
 }
 
-/* ── SCROLLBAR ─────────────────────────────── */
 ::-webkit-scrollbar{ width:6px; height:6px; }
 ::-webkit-scrollbar-track{ background:var(--bg); }
 ::-webkit-scrollbar-thumb{ background:var(--border2); border-radius:3px; }
@@ -79,39 +125,40 @@ body{
    ══════════════════════════════════════════ */
 #topnav{
   position: sticky; top:0; z-index:100;
-  background: rgba(13,17,23,.9);
+  background: color-mix(in srgb, var(--surface0) 95%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  gap: 4px;
+  padding: 0 24px;
+  gap: 2px;
   overflow-x: auto;
   scrollbar-width: none;
-  min-height: 56px;
+  min-height: 58px;
 }
 #topnav::-webkit-scrollbar{ display:none; }
 
 #brand{
   font-size: 13px;
   font-weight: 800;
-  color: var(--amber);
-  letter-spacing: .5px;
+  color: var(--indigo);
+  letter-spacing: .3px;
   white-space: nowrap;
-  padding-right: 16px;
-  margin-right: 8px;
-  border-right: 1px solid var(--border2);
+  padding-right: 20px;
+  margin-right: 10px;
+  border-right: 1.5px solid var(--border);
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
 }
 #brand .dot{
-  width:8px; height:8px;
-  background: var(--amber);
+  width:9px; height:9px;
+  background: var(--amber2);
   border-radius:50%;
-  box-shadow: 0 0 8px var(--amber);
+  box-shadow: 0 0 6px rgba(245,158,11,.5);
 }
 
 .nav-btn{
@@ -119,8 +166,8 @@ body{
   border: none;
   color: var(--text3);
   cursor: pointer;
-  padding: 7px 12px;
-  font-size: 12px;
+  padding: 7px 11px;
+  font-size: 12.5px;
   font-weight: 600;
   font-family: inherit;
   white-space: nowrap;
@@ -131,14 +178,14 @@ body{
   transition: all .15s;
   flex-shrink: 0;
 }
-.nav-btn .icon{ font-size:14px; }
 .nav-btn .hint{
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text3);
   background: var(--surface2);
   padding: 2px 6px;
   border-radius: 4px;
+  border: 1px solid var(--border);
 }
 .nav-btn:hover{
   color: var(--text1);
@@ -147,22 +194,23 @@ body{
 .nav-btn.active{
   color: #fff;
   background: var(--phase-color, var(--indigo));
-  box-shadow: 0 0 16px color-mix(in srgb, var(--phase-color, var(--indigo)) 40%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--phase-color, var(--indigo)) 35%, transparent);
 }
 .nav-btn.active .hint{
-  background: rgba(0,0,0,.2);
-  color: rgba(255,255,255,.7);
+  background: rgba(0,0,0,.12);
+  color: rgba(255,255,255,.8);
+  border-color: transparent;
 }
 
 /* ══════════════════════════════════════════
    ROLE BAR
    ══════════════════════════════════════════ */
 #rolebar{
-  background: var(--surface1);
+  background: var(--surface0);
   border-bottom: 1px solid var(--border);
-  padding: 10px 20px;
+  padding: 10px 24px;
   display: flex;
-  gap: 6px;
+  gap: 7px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -171,7 +219,7 @@ body{
   font-weight: 700;
   color: var(--text3);
   text-transform: uppercase;
-  letter-spacing: .6px;
+  letter-spacing: .7px;
   margin-right: 4px;
 }
 
@@ -180,8 +228,8 @@ body{
   border: 1px solid var(--border);
   color: var(--text2);
   border-radius: 20px;
-  padding: 5px 14px;
-  font-size: 12px;
+  padding: 5px 15px;
+  font-size: 12.5px;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
@@ -189,6 +237,7 @@ body{
   align-items: center;
   gap: 6px;
   transition: all .15s;
+  box-shadow: var(--shadow-sm);
 }
 .role-btn:hover{
   border-color: var(--border2);
@@ -196,29 +245,40 @@ body{
   background: var(--surface3);
 }
 .role-btn.active{
-  background: color-mix(in srgb, var(--indigo) 20%, transparent);
+  background: var(--indigo);
   border-color: var(--indigo);
-  color: var(--indigo2);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(79,82,217,.3);
 }
 .role-count{
-  background: rgba(255,255,255,.1);
+  background: rgba(0,0,0,.12);
   border-radius: 10px;
   padding: 1px 7px;
   font-size: 10px;
   font-weight: 700;
 }
 .role-btn.active .role-count{
-  background: color-mix(in srgb, var(--indigo) 30%, transparent);
-  color: var(--indigo2);
+  background: rgba(255,255,255,.25);
 }
 
 /* ══════════════════════════════════════════
-   MAIN CONTENT
+   MAIN — FULL WIDTH
    ══════════════════════════════════════════ */
 #main{
-  padding: 28px 20px;
-  max-width: 1100px;
-  margin: 0 auto;
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media(min-width:1200px){
+  #main{
+    padding: 32px 40px;
+  }
+}
+@media(min-width:1600px){
+  #main{
+    padding: 36px 56px;
+  }
 }
 
 /* ══════════════════════════════════════════
@@ -226,42 +286,42 @@ body{
    ══════════════════════════════════════════ */
 .home-hero{
   text-align: center;
-  padding: 48px 20px 36px;
+  padding: 52px 20px 40px;
   position: relative;
 }
 .home-hero::before{
   content:'';
   position:absolute; top:0; left:50%; transform:translateX(-50%);
-  width:400px; height:300px;
-  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--indigo) 12%, transparent) 0%, transparent 70%);
+  width:500px; height:300px;
+  background: radial-gradient(ellipse at center, rgba(99,102,241,.06) 0%, transparent 70%);
   pointer-events:none;
 }
 .home-badge{
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: color-mix(in srgb, var(--amber) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
-  color: var(--amber2);
+  background: var(--amber-bg);
+  border: 1px solid rgba(217,119,6,.2);
+  color: var(--amber);
   font-size: 11px;
   font-weight: 700;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 20px;
-  margin-bottom: 16px;
-  letter-spacing: .4px;
+  margin-bottom: 18px;
+  letter-spacing: .5px;
   text-transform: uppercase;
 }
 .home-hero h1{
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   color: var(--text1);
-  line-height: 1.25;
-  margin-bottom: 10px;
+  line-height: 1.2;
+  margin-bottom: 12px;
 }
-.home-hero h1 span{ color: var(--indigo2); }
+.home-hero h1 span{ color: var(--indigo); }
 .home-hero p{
   color: var(--text2);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
 }
 
@@ -269,51 +329,45 @@ body{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 14px;
-  margin-top: 32px;
+  margin-top: 36px;
+}
+
+@media(min-width:1400px){
+  .phase-grid{ grid-template-columns: repeat(6, 1fr); }
 }
 
 .phase-card{
-  background: var(--surface1);
+  background: var(--surface0);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 20px;
+  padding: 22px;
   cursor: pointer;
   transition: all .2s;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 .phase-card::before{
   content:'';
   position:absolute; top:0; left:0; right:0; height:3px;
   background: var(--c, var(--indigo));
-  opacity:.7;
-}
-.phase-card::after{
-  content:'';
-  position:absolute; top:-40px; right:-20px;
-  width:100px; height:100px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--c, var(--indigo)) 15%, transparent), transparent 70%);
-  pointer-events:none;
-  transition: opacity .2s;
-  opacity:0;
 }
 .phase-card:hover{
   border-color: var(--c, var(--indigo));
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,.3), 0 0 0 1px var(--c, var(--indigo));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
-.phase-card:hover::after{ opacity:1; }
-
 .phase-card .icon{
-  font-size: 24px;
+  font-size: 22px;
   margin-bottom: 10px;
   display: block;
 }
 .phase-card h3{
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--text1);
   margin-bottom: 4px;
+  line-height: 1.3;
 }
 .phase-card p{
   font-size: 12px;
@@ -326,11 +380,11 @@ body{
    ══════════════════════════════════════════ */
 .section-header{
   margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--border);
 }
 .section-header h2{
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   color: var(--text1);
   display: flex;
@@ -339,53 +393,133 @@ body{
 }
 .section-header p{
   color: var(--text2);
-  font-size: 13px;
-  margin-top: 6px;
-  line-height: 1.6;
+  font-size: 15px;
+  margin-top: 7px;
+  line-height: 1.65;
   font-weight: 500;
 }
 
-/* ── GATE BOX ─────────────────────────── */
+/* GATE BOX */
 .gate-box{
-  background: color-mix(in srgb, var(--amber) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--amber) 25%, transparent);
+  background: var(--amber-bg);
+  border: 1px solid rgba(217,119,6,.22);
   border-radius: var(--r-md);
-  padding: 14px 18px;
-  margin: 16px 0;
+  padding: 15px 20px;
+  margin: 18px 0;
   display: flex;
   align-items: flex-start;
   gap: 12px;
 }
-.gate-box .lock{
-  font-size: 18px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.gate-box p{
-  font-size: 13px;
-  color: var(--amber2);
-  font-weight: 500;
-  line-height: 1.5;
-}
-.gate-box strong{ color: #fde68a; }
+.gate-box .lock{ font-size:19px; flex-shrink:0; margin-top:1px; }
+.gate-box p{ font-size: 14px; color: #92400e; font-weight: 500; line-height:1.6; }
+.gate-box strong{ color: #78350f; font-weight: 700; }
 
 /* ══════════════════════════════════════════
-   PROCEDURE CARDS
+   STATUS SELECTOR
    ══════════════════════════════════════════ */
-.proc-grid{ display:grid; gap:12px; }
+.status-row{
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.status-btn{
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text3);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.status-btn:hover{ border-color: var(--border2); color: var(--text2); }
+.status-btn.s-pending.on{ background: var(--surface3); color: var(--text2); border-color: var(--border2); }
+.status-btn.s-active.on{ background: var(--indigo-bg); color: var(--indigo); border-color: var(--indigo); }
+.status-btn.s-done.on{ background: var(--emerald-bg); color: var(--emerald); border-color: var(--emerald); }
+.status-btn.s-blocked.on{ background: var(--rose-bg); color: var(--rose); border-color: var(--rose); }
+
+/* Per-step status button */
+.step-status-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px 3px 7px;
+  border-radius:20px;
+  border:1.5px solid var(--border2);
+  background:var(--surface2);
+  cursor:pointer;flex-shrink:0;
+  font-size:11.5px;font-weight:700;
+  transition:all .15s;
+  color:var(--text3);
+  font-family:inherit;
+  white-space:nowrap;
+  margin-top:1px;
+  user-select:none;
+}
+.step-status-btn:hover{filter:brightness(.96);border-color:var(--border2);}
+.step-status-btn .ss-icon{font-size:12px;line-height:1;}
+.step-status-btn[data-status="active"]{background:var(--indigo-bg);border-color:var(--indigo);color:var(--indigo);}
+.step-status-btn[data-status="done"]{background:var(--emerald-bg);border-color:var(--emerald);color:var(--emerald);}
+.step-status-btn[data-status="blocked"]{background:var(--rose-bg);border-color:var(--rose);color:var(--rose);}
+.check-label.blocked{color:var(--rose);text-decoration:line-through;opacity:.7;}
+
+/* Phase progress on home cards */
+.phase-prog-wrap{
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.phase-prog-bar{
+  height: 5px;
+  background: var(--surface3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.phase-prog-fill{
+  height: 100%;
+  border-radius: 3px;
+  background: var(--c, var(--indigo));
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+.phase-prog-label{
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════
+   PROC CARDS — GRID EN DESKTOP
+   ══════════════════════════════════════════ */
+.proc-grid{
+  display: grid;
+  gap: 14px;
+}
+
+@media(min-width:1100px){
+  .proc-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media(min-width:1600px){
+  .proc-grid{ grid-template-columns: 1fr 1fr 1fr; }
+}
 
 .proc-card{
-  background: var(--surface1);
+  background: var(--surface0);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   overflow: hidden;
-  transition: border-color .2s;
+  transition: box-shadow .2s, border-color .2s;
+  box-shadow: var(--shadow-sm);
 }
-.proc-card:hover{ border-color: var(--border2); }
+.proc-card:hover{ box-shadow: var(--shadow-md); border-color: var(--border2); }
 .proc-card.hidden{ display:none; }
 
 .proc-header{
-  padding: 16px 20px;
+  padding: 18px 20px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -395,16 +529,16 @@ body{
 }
 .proc-header::before{
   content:'';
-  position:absolute; left:0; top:12px; bottom:12px; width:3px;
+  position:absolute; left:0; top:14px; bottom:14px; width:4px;
   background: var(--c, var(--indigo));
   border-radius: 0 3px 3px 0;
 }
-.proc-header:hover{ background: rgba(255,255,255,.02); }
+.proc-header:hover{ background: var(--surface2); }
 
 .proc-meta{ flex:1; }
 
 .proc-code{
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   color: var(--c, var(--indigo));
   text-transform: uppercase;
@@ -412,11 +546,11 @@ body{
   margin-bottom: 4px;
 }
 .proc-title{
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 700;
   color: var(--text1);
   line-height: 1.3;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .proc-info{
   display: flex;
@@ -426,8 +560,8 @@ body{
 }
 
 .badge{
-  font-size: 11px;
-  padding: 3px 9px;
+  font-size: 11.5px;
+  padding: 3px 10px;
   border-radius: 6px;
   font-weight: 600;
   display: inline-flex;
@@ -435,9 +569,9 @@ body{
   gap: 4px;
 }
 .badge-owner{
-  background: color-mix(in srgb, var(--indigo) 15%, transparent);
-  color: var(--indigo2);
-  border: 1px solid color-mix(in srgb, var(--indigo) 25%, transparent);
+  background: var(--indigo-bg);
+  color: var(--indigo);
+  border: 1px solid rgba(79,82,217,.18);
 }
 .badge-window{
   background: var(--surface2);
@@ -445,47 +579,47 @@ body{
   border: 1px solid var(--border);
 }
 .badge-type{
-  background: color-mix(in srgb, var(--emerald) 12%, transparent);
-  color: #6ee7b7;
-  border: 1px solid color-mix(in srgb, var(--emerald) 20%, transparent);
+  background: var(--emerald-bg);
+  color: var(--emerald);
+  border: 1px solid rgba(5,150,105,.18);
 }
 .badge-type.puntual{
-  background: color-mix(in srgb, var(--amber) 12%, transparent);
-  color: #fcd34d;
-  border: 1px solid color-mix(in srgb, var(--amber) 20%, transparent);
+  background: var(--amber-bg);
+  color: var(--amber);
+  border: 1px solid rgba(217,119,6,.18);
 }
 
 /* Progress */
-.progress-wrap{ margin-top: 10px; }
+.progress-wrap{ margin-top: 12px; }
 .progress-label{
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text3);
   font-weight: 600;
   margin-bottom: 5px;
 }
 .progress-bar{
-  height: 6px;
+  height: 7px;
   background: var(--surface3);
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
 }
 .progress-fill{
   height: 100%;
-  border-radius: 3px;
+  border-radius: 4px;
   background: var(--c, var(--indigo));
   transition: width .4s cubic-bezier(.4,0,.2,1);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--c, var(--indigo)) 60%, transparent);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--c, var(--indigo)) 40%, transparent);
 }
 
 .proc-toggle{
-  width: 28px; height: 28px;
+  width: 30px; height: 30px;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 8px;
   display: flex; align-items:center; justify-content:center;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text3);
   flex-shrink: 0;
   margin-top: 2px;
@@ -493,38 +627,39 @@ body{
 }
 .proc-header:hover .proc-toggle{
   background: var(--surface3);
-  color: var(--text2);
+  color: var(--text1);
 }
 
-/* ── PROC BODY ─────────────────────────── */
+/* PROC BODY */
 .proc-body{
   display: none;
   padding: 0 20px 20px;
   border-top: 1px solid var(--border);
+  background: var(--surface2);
 }
 .proc-body.open{ display:block; }
 
 .dep-box{
-  background: color-mix(in srgb, var(--amber) 7%, transparent);
-  border: 1px solid color-mix(in srgb, var(--amber) 20%, transparent);
+  background: rgba(217,119,6,.07);
+  border: 1px solid rgba(217,119,6,.18);
   border-radius: var(--r-sm);
   padding: 10px 14px;
   margin: 14px 0;
-  font-size: 12px;
-  color: #fde68a;
+  font-size: 13.5px;
+  color: #92400e;
   font-weight: 500;
 }
 .hitos-box{
-  background: color-mix(in srgb, var(--violet) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--violet) 25%, transparent);
+  background: var(--violet-bg);
+  border: 1px solid rgba(124,58,237,.18);
   border-radius: var(--r-sm);
   padding: 12px 16px;
   margin: 14px 0;
-  font-size: 13px;
-  color: #c4b5fd;
+  font-size: 14px;
+  color: var(--violet);
   font-weight: 500;
 }
-.hitos-box strong{ color: #a78bfa; font-weight: 700; }
+.hitos-box strong{ color: #5b21b6; font-weight: 700; }
 
 /* Steps */
 .steps-list{ margin: 16px 0; }
@@ -534,7 +669,7 @@ body{
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: .7px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -549,30 +684,32 @@ body{
 .step-item{
   display: flex;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   align-items: flex-start;
   padding: 10px 12px;
   border-radius: var(--r-sm);
-  transition: background .15s;
+  background: var(--surface0);
+  border: 1px solid var(--border);
+  transition: border-color .15s;
 }
-.step-item:hover{ background: rgba(255,255,255,.025); }
+.step-item:hover{ border-color: var(--border2); }
 
 .step-num{
-  background: color-mix(in srgb, var(--c, var(--indigo)) 20%, transparent);
-  border: 1px solid color-mix(in srgb, var(--c, var(--indigo)) 40%, transparent);
+  background: color-mix(in srgb, var(--c, var(--indigo)) 12%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--c, var(--indigo)) 30%, transparent);
   color: var(--c, var(--indigo));
   border-radius: 8px;
-  width: 24px; height: 24px;
+  width: 26px; height: 26px;
   display: flex; align-items:center; justify-content:center;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 11.5px;
+  font-weight: 800;
   flex-shrink: 0;
   margin-top: 1px;
 }
 .step-text{
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text1);
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 500;
 }
 
@@ -581,24 +718,26 @@ body{
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
   padding: 10px 12px;
   border-radius: var(--r-sm);
-  transition: background .15s;
+  background: var(--surface0);
+  border: 1px solid var(--border);
+  transition: border-color .15s;
   cursor: pointer;
 }
-.check-item:hover{ background: rgba(255,255,255,.025); }
+.check-item:hover{ border-color: var(--border2); }
 .check-item input[type=checkbox]{
-  margin-top: 2px;
+  margin-top: 3px;
   accent-color: var(--c, var(--indigo));
   width: 15px; height: 15px;
   flex-shrink: 0;
   cursor: pointer;
 }
 .check-label{
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text1);
-  line-height: 1.6;
+  line-height: 1.65;
   cursor: pointer;
   font-weight: 500;
 }
@@ -612,10 +751,10 @@ body{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin: 16px 0;
+  margin: 14px 0;
 }
 .meta-box{
-  background: var(--surface2);
+  background: var(--surface0);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: 14px;
@@ -623,107 +762,109 @@ body{
 .meta-box.full{ grid-column:1/-1; }
 .meta-box h4{
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text3);
   text-transform: uppercase;
-  letter-spacing: .6px;
+  letter-spacing: .7px;
   margin-bottom: 7px;
 }
 .meta-box p{
-  font-size: 12px;
+  font-size: 13.5px;
   color: var(--text1);
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 500;
 }
 .meta-box.warn{
-  background: color-mix(in srgb, var(--rose) 8%, transparent);
-  border-color: color-mix(in srgb, var(--rose) 25%, transparent);
+  background: var(--rose-bg);
+  border-color: rgba(220,38,38,.18);
 }
-.meta-box.warn h4{ color: #fca5a5; }
-.meta-box.warn p{ color: #fecaca; }
+.meta-box.warn h4{ color: var(--rose); }
+.meta-box.warn p{ color: #991b1b; }
 
 /* ══════════════════════════════════════════
    GOV / FT / TABLES
    ══════════════════════════════════════════ */
 .info-card{
-  background: var(--surface1);
+  background: var(--surface0);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 20px;
-  margin-bottom: 14px;
-  border-left: 3px solid var(--gov);
+  padding: 22px;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--gov);
+  box-shadow: var(--shadow-sm);
 }
 .info-card h3{
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  color: #c4b5fd;
-  margin-bottom: 14px;
+  color: var(--text1);
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 .info-card p{
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text1);
-  line-height: 1.65;
+  line-height: 1.7;
   font-weight: 500;
 }
-.info-card ul{ margin: 8px 0 0 4px; }
+.info-card ul{ margin: 8px 0 0 0; list-style:none; }
 .info-card ul li{
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text1);
   line-height: 1.65;
   font-weight: 500;
-  padding: 4px 0 4px 16px;
+  padding: 8px 0 8px 18px;
   position: relative;
   border-bottom: 1px solid var(--border);
 }
 .info-card ul li:last-child{ border-bottom:none; }
 .info-card ul li::before{
   content:'';
-  position:absolute; left:0; top:13px;
-  width:6px; height:6px;
+  position:absolute; left:0; top:17px;
+  width:7px; height:7px;
   background: var(--gov);
   border-radius:50%;
 }
 
 .ft-card{
-  background: var(--surface1);
+  background: var(--surface0);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 20px;
-  margin-bottom: 14px;
-  border-left: 3px solid var(--ft);
+  padding: 22px;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--ft);
+  box-shadow: var(--shadow-sm);
 }
 .ft-card h3{
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  color: #c4b5fd;
-  margin-bottom: 12px;
+  color: var(--text1);
+  margin-bottom: 14px;
 }
 .ft-card p{
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text1);
-  line-height: 1.65;
+  line-height: 1.7;
   font-weight: 500;
   margin-bottom: 6px;
 }
 .ft-card ul{ margin: 6px 0 0 0; list-style:none; }
 .ft-card ul li{
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text1);
   font-weight: 500;
-  padding: 8px 0 8px 20px;
+  padding: 8px 0 8px 22px;
   position: relative;
   border-top: 1px solid var(--border);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .ft-card ul li:first-child{ border-top:none; }
 .ft-card ul li::before{
   content:'→';
   position:absolute; left:0;
   color: var(--ft);
-  font-size: 12px;
+  font-weight: 700;
   top: 9px;
 }
 
@@ -731,67 +872,67 @@ body{
 .data-table{
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: 14px;
   margin: 12px 0;
   font-weight: 500;
 }
 .data-table th{
   background: var(--surface2);
   color: var(--text2);
-  padding: 10px 14px;
+  padding: 11px 16px;
   text-align: left;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 11.5px;
   text-transform: uppercase;
   letter-spacing: .5px;
   border-bottom: 2px solid var(--border2);
 }
 .data-table td{
-  padding: 10px 14px;
+  padding: 11px 16px;
   border-bottom: 1px solid var(--border);
   color: var(--text1);
   vertical-align: top;
-  line-height: 1.5;
+  line-height: 1.6;
 }
-.data-table tr:last-child td{ border-bottom: none; }
-.data-table tr:hover td{ background: rgba(255,255,255,.02); }
+.data-table tr:last-child td{ border-bottom:none; }
+.data-table tr:hover td{ background: var(--surface2); }
 
 .severity-table{
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 500;
 }
 .severity-table th{
   background: var(--surface2);
   color: var(--text2);
-  padding: 9px 12px;
+  padding: 10px 14px;
   text-align: left;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 11.5px;
   text-transform: uppercase;
   letter-spacing: .5px;
   border-bottom: 2px solid var(--border2);
 }
 .severity-table td{
-  padding: 9px 12px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--border);
   color: var(--text1);
   vertical-align: top;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* ══════════════════════════════════════════
-   ANEXOS / KPI / FORMAT TABLES
+   ANEXOS / KPI
    ══════════════════════════════════════════ */
-.anexo-section{ margin-bottom: 32px; }
+.anexo-section{ margin-bottom: 36px; }
 .anexo-section h3{
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text1);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -801,67 +942,66 @@ body{
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
-  padding: 14px 16px;
+  padding: 16px 18px;
   margin: 10px 0;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text1);
-  line-height: 1.65;
+  line-height: 1.7;
   font-weight: 500;
 }
-.info-box ul{ margin: 6px 0 0 16px; }
-.info-box li{ margin-bottom: 4px; }
+.info-box ul{ margin: 8px 0 0 16px; }
+.info-box li{ margin-bottom: 5px; }
 
 .note-box{
-  background: color-mix(in srgb, var(--amber) 7%, transparent);
-  border: 1px solid color-mix(in srgb, var(--amber) 20%, transparent);
+  background: var(--amber-bg);
+  border: 1px solid rgba(217,119,6,.2);
   border-radius: var(--r-sm);
   padding: 10px 14px;
-  font-size: 12px;
-  color: #fde68a;
+  font-size: 13px;
+  color: #92400e;
   font-weight: 500;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
-/* ══════════════════════════════════════════
-   MINUTO TABLE
-   ══════════════════════════════════════════ */
+/* Minuto table */
 .minuto-table{
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 500;
 }
 .minuto-table th{
   background: var(--surface2);
   color: var(--text2);
-  padding: 9px 12px;
+  padding: 10px 14px;
   text-align: left;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 11.5px;
   text-transform: uppercase;
   letter-spacing: .5px;
+  border-bottom: 2px solid var(--border2);
 }
 .minuto-table td{
-  padding: 9px 12px;
+  padding: 10px 14px;
   border-top: 1px solid var(--border);
   color: var(--text1);
   vertical-align: top;
+  line-height: 1.6;
 }
 
 /* ══════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════ */
-@media(max-width:600px){
+@media(max-width:768px){
   .meta-grid{ grid-template-columns:1fr; }
+  .proc-grid{ grid-template-columns:1fr; }
   .phase-grid{ grid-template-columns:1fr 1fr; }
-  #main{ padding:16px 12px; }
+  #main{ padding:16px 14px; }
   .nav-btn .hint{ display:none; }
 }
-@media(max-width:400px){
+@media(max-width:420px){
   .phase-grid{ grid-template-columns:1fr; }
 }
-
-/* Reduced motion */
 @media(prefers-reduced-motion: reduce){
   *{ transition:none !important; animation:none !important; }
 }
@@ -869,12 +1009,8 @@ body{
 </head>
 <body>
 
-<nav id="topnav" role="navigation" aria-label="Navegación principal">
-  <div id="brand" aria-label="Americas Alliance Manual">
-    <div class="dot" aria-hidden="true"></div>
-    AA Manual
-  </div>
-</nav>
+<nav id="topnav" role="navigation" aria-label="Navegación principal"></nav>
+<button id="theme-toggle" aria-label="Cambiar tema" title="Cambiar a modo oscuro" style="position:fixed;bottom:20px;right:20px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--surface0);color:var(--text2);font-size:18px;cursor:pointer;box-shadow:var(--shadow-md);transition:all .2s;display:flex;align-items:center;justify-content:center;">🌙</button>
 
 <div id="rolebar" role="toolbar" aria-label="Filtrar por área">
   <span id="rolebar-label">Área:</span>
@@ -1009,11 +1145,25 @@ const PROCS=[
   {id:'pos-05',code:'POS-05',stage:'pos',title:'Evaluación, lecciones aprendidas y cierre formal',owner:'COO',support:'Todas las áreas',window:'T+15 a T+30 días',type:'puntual',roles:['coo','ventas','marketing','sistemas','finanzas','eventos'],dep:'POS-01 a POS-04.',steps:['Consolidar presupuesto versus real, participación versus proyección y cumplimiento de sponsor.','Analizar ausencias/no-show, utilización de transporte, desempeño hotelero, tiempos y errores.','Solicitar retroalimentación estructurada al equipo, participantes y sponsors con preguntas breves y comparables.','Clasificar incidencias por causa raíz, impacto y acción preventiva.','Generar plan de mejoras con dueño y fecha, actualizar manual y anexos luego de aprobación.','Presentar informe final al CEO y archivar documentación definitiva.'],evidence:'Informe final con KPIs, evidencias, costos y plan de acciones correctivas; aprobación del CEO.',control:'El evento se cierra cuando excepciones y compromisos tengan responsable, solución y fecha.'},
 ];
 
-// ── State ──────────────────────────────────────────
-let currentStage='home', currentRole='all', checks={};
+let currentStage='home', currentRole='all', checks={}, procStatus={}, stepStatus={};
 function saveChecks(){try{localStorage.setItem('aa_v3',JSON.stringify(checks));}catch(e){}}
+function saveStatus(){try{localStorage.setItem('aa_v3_st',JSON.stringify(procStatus));}catch(e){}}
+function saveStepStatus(){try{localStorage.setItem('aa_v3_ss',JSON.stringify(stepStatus));}catch(e){}}
 function loadChecks(){try{const d=localStorage.getItem('aa_v3');if(d)checks=JSON.parse(d);}catch(e){}}
-loadChecks();
+function loadStatus(){try{const d=localStorage.getItem('aa_v3_st');if(d)procStatus=JSON.parse(d);}catch(e){}}
+function loadStepStatus(){try{const d=localStorage.getItem('aa_v3_ss');if(d)stepStatus=JSON.parse(d);}catch(e){}}
+loadChecks(); loadStatus(); loadStepStatus();
+// Theme toggle
+(function(){
+  const btn=document.getElementById('theme-toggle');
+  const saved=localStorage.getItem('aa_theme')||'light';
+  if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark');btn.textContent='☀️';btn.title='Cambiar a modo claro';}
+  btn.addEventListener('click',function(){
+    const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+    if(isDark){document.documentElement.removeAttribute('data-theme');btn.textContent='🌙';btn.title='Cambiar a modo oscuro';localStorage.setItem('aa_theme','light');}
+    else{document.documentElement.setAttribute('data-theme','dark');btn.textContent='☀️';btn.title='Cambiar a modo claro';localStorage.setItem('aa_theme','dark');}
+  });
+})();
 
 function stageColor(id){const s=STAGES.find(x=>x.id===id);return s?s.color:'var(--indigo)';}
 function typeBadge(type){
@@ -1021,23 +1171,21 @@ function typeBadge(type){
   return'<span class="badge badge-type">↻ CONTINUO</span>';
 }
 
-// ── Render nav ─────────────────────────────────────
 function renderNav(){
   const nav=document.getElementById('topnav');
-  nav.innerHTML='<div id="brand" aria-label="Americas Alliance Manual"><div class="dot" aria-hidden="true"></div>AA Manual</div>';
+  nav.innerHTML='<div id="brand"><div class="dot"></div>AA Manual</div>';
   STAGES.forEach(s=>{
     const btn=document.createElement('button');
     btn.className='nav-btn'+(currentStage===s.id?' active':'');
     btn.style.setProperty('--phase-color',s.color);
     btn.dataset.action='go';
     btn.dataset.stage=s.id;
-    btn.setAttribute('aria-current', currentStage===s.id?'page':'false');
-    btn.innerHTML=`<span class="icon" aria-hidden="true">${s.icon}</span><span>${s.label}</span>${s.hint?`<span class="hint">${s.hint}</span>`:''}`;
+    btn.setAttribute('aria-current',currentStage===s.id?'page':'false');
+    btn.innerHTML=`<span>${s.label}</span>${s.hint?`<span class="hint">${s.hint}</span>`:''}`;
     nav.appendChild(btn);
   });
 }
 
-// ── Role bar ───────────────────────────────────────
 function renderRoleBar(){
   document.querySelectorAll('.role-btn').forEach(b=>{
     const active=b.dataset.role===currentRole;
@@ -1046,7 +1194,6 @@ function renderRoleBar(){
   });
 }
 
-// ── Role counts ────────────────────────────────────
 function updateRoleCounts(){
   const roles=['all','coo','ventas','marketing','sistemas','finanzas','eventos'];
   const stageProcs=PROCS.filter(p=>p.stage===currentStage);
@@ -1059,19 +1206,20 @@ function updateRoleCounts(){
   });
 }
 
-// ── Render proc card ───────────────────────────────
 function renderProc(p){
   const c=stageColor(p.stage);
   const isVisible=currentRole==='all'||p.roles.includes(currentRole);
-  const done=p.steps.filter((_,i)=>checks[p.id+'-'+i]).length;
+  const STEP_IC={pending:['○','Pendiente'],active:['◑','En proceso'],done:['✓','Listo'],blocked:['✕','Bloqueado']};
+  const done=p.steps.filter((_,i)=>(stepStatus[p.id+'-'+i]||'pending')==='done').length;
   const pct=p.steps.length>0?Math.round(done/p.steps.length*100):0;
 
   const stepsHtml=p.steps.map((s,i)=>{
     const k=p.id+'-'+i;
-    const isDone=!!checks[k];
+    const st=stepStatus[k]||'pending';
+    const lc=st==='done'?' checked':st==='blocked'?' blocked':'';
     return`<div class="check-item">
-      <input type="checkbox" data-action="toggleCheck" data-check="${k}" ${isDone?'checked':''} aria-label="${s.substring(0,60)}">
-      <span class="check-label${isDone?' checked':''}">${s}</span>
+      <button class="step-status-btn" data-action="cycleStep" data-key="${k}" data-status="${st}" title="Clic para cambiar estado"><span class="ss-icon">${STEP_IC[st][0]}</span>${STEP_IC[st][1]}</button>
+      <span class="check-label${lc}">${s}</span>
     </div>`;
   }).join('');
 
@@ -1085,7 +1233,10 @@ function renderProc(p){
           <span class="badge badge-window">${p.window}</span>
           ${typeBadge(p.type)}
         </div>
-        ${p.steps.length>0?`<div class="progress-wrap"><div class="progress-label"><span>Progreso</span><span>${pct}%</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div></div>`:''}
+        <div class="status-row" onclick="event.stopPropagation()">
+          ${[['pending','□','Pendiente'],['active','●','En proceso'],['done','✓','Completado'],['blocked','×','Bloqueado']].map(([v,ic,lb])=>`<button class="status-btn s-${v}${(procStatus[p.id]||'pending')===v?' on':''}" data-action="setStatus" data-proc="${p.id}" data-val="${v}">${ic} ${lb}</button>`).join('')}
+        </div>
+        ${p.steps.length>0?`<div class="progress-wrap"><div class="progress-label"><span>Pasos</span><span>${pct}%</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div></div>`:''}
       </div>
       <div class="proc-toggle" aria-hidden="true">▸</div>
     </div>
@@ -1103,7 +1254,6 @@ function renderProc(p){
   return html;
 }
 
-// ── Render stage ───────────────────────────────────
 function renderStage(){
   const main=document.getElementById('main');
   if(currentStage==='home'){renderHome(main);return;}
@@ -1118,10 +1268,10 @@ function renderStage(){
   const gate=GATES[currentStage];
   const desc=PHASE_DESC[currentStage]||'';
 
-  let html=`<div class="section-header"><h2>${st.icon} ${st.label}</h2><p>${desc}</p></div>`;
-  if(gate) html+=`<div class="gate-box"><span class="lock" aria-hidden="true">🔒</span><p><strong>PUERTA DE SALIDA:</strong> ${gate}</p></div>`;
+  let html=`<div class="section-header"><h2>${st.label}</h2><p>${desc}</p></div>`;
+  if(gate) html+=`<div class="gate-box"><span class="lock">🔒</span><p><strong>PUERTA DE SALIDA:</strong> ${gate}</p></div>`;
   if(procs.length===0){
-    html+=`<p style="color:var(--text3);font-size:14px;margin-top:20px;font-weight:500">Sin procedimientos en esta sección.</p>`;
+    html+=`<p style="color:var(--text3);font-size:15px;margin-top:20px;font-weight:500">Sin procedimientos en esta sección.</p>`;
   } else {
     html+=`<div class="proc-grid">`;
     procs.forEach(p=>{html+=renderProc(p);});
@@ -1130,20 +1280,19 @@ function renderStage(){
   main.innerHTML=html;
 }
 
-// ── Home ───────────────────────────────────────────
 function renderHome(main){
   const phases=[
-    {id:'gov',label:'Gobernanza y Autoridad',desc:'Organigrama, reglas y paquete documental',icon:'◈',c:'var(--gov)'},
-    {id:'f0',label:'F0 — Estrategia y Decisión',desc:'T-12 a T-9m · 3 procedimientos',icon:'◉',c:'var(--f0)'},
-    {id:'f1',label:'F1 — Diseño y Lanzamiento',desc:'T-9 a T-6m · 5 procedimientos',icon:'◉',c:'var(--f1)'},
-    {id:'f2',label:'F2 — Producción y Contratación',desc:'T-6 a T-3m · 3 procedimientos',icon:'◉',c:'var(--f2)'},
-    {id:'f3',label:'F3 — Preparación Operativa',desc:'T-3m a T-30d · 5 procedimientos',icon:'◉',c:'var(--f3)'},
-    {id:'f4',label:'F4 — Preparación Final',desc:'T-30d a T-0 · 3 procedimientos',icon:'◉',c:'var(--f4)'},
-    {id:'eje',label:'F5 — Operación',desc:'T-0 a T+1d · 12 procedimientos',icon:'◎',c:'var(--eje)'},
-    {id:'ft',label:'FT Capa Transversal',desc:'Permanente · Calidad, seguridad e incidencias',icon:'◧',c:'var(--ft)'},
-    {id:'pos',label:'F6 — Cierre y Postevento',desc:'T+1 a T+30d · 5 procedimientos',icon:'◉',c:'var(--pos)'},
-    {id:'kpi',label:'KPIs y RACI',desc:'Indicadores y matriz de responsabilidades',icon:'▤',c:'var(--kpi)'},
-    {id:'anexos',label:'Anexos',desc:'Formatos, Playa del Carmen 2026, Sponsors',icon:'◫',c:'var(--kpi)'},
+    {id:'gov',label:'Gobernanza y Autoridad',desc:'Organigrama, reglas y paquete documental',c:'var(--gov)'},
+    {id:'f0',label:'F0 — Estrategia y Decisión',desc:'T-12 a T-9m · 3 procedimientos',c:'var(--f0)'},
+    {id:'f1',label:'F1 — Diseño y Lanzamiento',desc:'T-9 a T-6m · 5 procedimientos',c:'var(--f1)'},
+    {id:'f2',label:'F2 — Producción y Contratación',desc:'T-6 a T-3m · 3 procedimientos',c:'var(--f2)'},
+    {id:'f3',label:'F3 — Preparación Operativa',desc:'T-3m a T-30d · 5 procedimientos',c:'var(--f3)'},
+    {id:'f4',label:'F4 — Preparación Final',desc:'T-30d a T-0 · 3 procedimientos',c:'var(--f4)'},
+    {id:'eje',label:'F5 — Operación',desc:'T-0 a T+1d · 12 procedimientos',c:'var(--eje)'},
+    {id:'ft',label:'FT Capa Transversal',desc:'Permanente · Calidad, seguridad e incidencias',c:'var(--ft)'},
+    {id:'pos',label:'F6 — Cierre y Postevento',desc:'T+1 a T+30d · 5 procedimientos',c:'var(--pos)'},
+    {id:'kpi',label:'KPIs y RACI',desc:'Indicadores y matriz de responsabilidades',c:'var(--kpi)'},
+    {id:'anexos',label:'Anexos',desc:'Formatos, Playa del Carmen 2026, Sponsors',c:'var(--kpi)'},
   ];
   let html=`<div class="home-hero">
     <div class="home-badge">v0.3 · Noviembre 2026</div>
@@ -1152,23 +1301,28 @@ function renderHome(main){
   </div>
   <div class="phase-grid">`;
   phases.forEach(p=>{
+    const phaseProcs=PROCS.filter(pr=>pr.stage===p.id);
+    const doneCnt=phaseProcs.filter(pr=>procStatus[pr.id]==='done').length;
+    const activeCnt=phaseProcs.filter(pr=>procStatus[pr.id]==='active').length;
+    const pct=phaseProcs.length>0?Math.round(doneCnt/phaseProcs.length*100):0;
+    const progHtml=phaseProcs.length>0
+      ?`<div class="phase-prog-wrap"><div class="phase-prog-bar"><div class="phase-prog-fill" style="width:${pct}%"></div></div><span class="phase-prog-label">${doneCnt}/${phaseProcs.length} completados${activeCnt>0?` · ${activeCnt} en proceso`:''}</span></div>`
+      :`<div class="phase-prog-wrap"><span class="phase-prog-label">Referencia permanente</span></div>`;
     html+=`<div class="phase-card" style="--c:${p.c}" data-action="go" data-stage="${p.id}" role="button" tabindex="0" aria-label="${p.label}">
-      <span class="icon" aria-hidden="true">${p.icon}</span>
       <h3>${p.label}</h3>
       <p>${p.desc}</p>
+      ${progHtml}
     </div>`;
   });
   html+=`</div>`;
   main.innerHTML=html;
 }
 
-// ── Gov ────────────────────────────────────────────
 function renderGov(main){
   main.innerHTML=`<div class="section-header">
-    <h2>◈ Gobierno, Autoridad y Responsabilidades</h2>
+    <h2>Gobierno, Autoridad y Responsabilidades</h2>
     <p>Marco de gobernanza permanente. Aplica en todas las fases.</p>
   </div>
-
   <div class="info-card">
     <h3>2.1 Organigrama funcional</h3>
     <table class="data-table">
@@ -1185,7 +1339,6 @@ function renderGov(main){
       </tbody>
     </table>
   </div>
-
   <div class="info-card">
     <h3>2.2 Reglas de autoridad</h3>
     <ul>
@@ -1195,24 +1348,20 @@ function renderGov(main){
       <li>Ningún proveedor puede interpretar una solicitud informal como autorización de gasto adicional.</li>
       <li>Toda modificación de agenda debe circular desde un único documento vigente, con hora y versión.</li>
     </ul>
-    <p style="margin-top:12px;font-size:12px;color:var(--amber2);">⚠️ PROPUESTA PARA VALIDAR: Definir umbrales monetarios de aprobación, personas titulares/suplentes y quién representa Administración/Sistemas cuando no haya una posición dedicada.</p>
+    <p style="margin-top:14px;font-size:13px;color:#92400e;background:#fef3c7;padding:10px 14px;border-radius:8px;border:1px solid rgba(217,119,6,.2);">⚠️ PROPUESTA PARA VALIDAR: Definir umbrales monetarios de aprobación, personas titulares/suplentes y quién representa Administración/Sistemas cuando no haya una posición dedicada.</p>
   </div>
-
   <div class="info-card">
     <h3>2.3 Paquete documental de cada edición</h3>
     <p>Crear una carpeta maestra con: acta de apertura, agenda y cronograma, presupuesto, contratos, rooming list, base de asistentes, matriz de patrocinadores, inventario, plan de transporte, planos, escaletas, material audiovisual, checklists, incidencias, cierre financiero y lecciones aprendidas. Cada archivo debe mostrar responsable, fecha de actualización y versión.</p>
   </div>
-
-  <div class="gate-box"><span class="lock" aria-hidden="true">📋</span><p><strong>Control de cambios:</strong> Toda alteración de alcance, costo, aforo, horario, ubicación, proveedor o derecho comercial se registra como solicitud de cambio. El COO estima impacto; el CEO decide cuando excede la delegación. Después se actualizan todos los documentos afectados y se comunica a las personas necesarias.</p></div>`;
+  <div class="gate-box"><span class="lock">📋</span><p><strong>Control de cambios:</strong> Toda alteración de alcance, costo, aforo, horario, ubicación, proveedor o derecho comercial se registra como solicitud de cambio. El COO estima impacto; el CEO decide cuando excede la delegación. Después se actualizan todos los documentos afectados y se comunica a las personas necesarias.</p></div>`;
 }
 
-// ── FT ─────────────────────────────────────────────
 function renderFT(main){
   main.innerHTML=`<div class="section-header">
-    <h2>◧ Capa Transversal — Calidad, Seguridad e Incidencias</h2>
+    <h2>Capa Transversal — Calidad, Seguridad e Incidencias</h2>
     <p>Activa desde F0 hasta F6. Debe leerse antes de la primera reunión de planificación.</p>
   </div>
-
   <div class="ft-card">
     <h3>FT-01 · Rutina de control diario (durante el evento)</h3>
     <ul>
@@ -1223,25 +1372,22 @@ function renderFT(main){
       <li>Marketing respalda y publica material autorizado, con etiquetas de patrocinadores y fotos correctas.</li>
     </ul>
   </div>
-
   <div class="ft-card">
     <h3>FT-02 · Sistema de incidencias</h3>
     <table class="severity-table">
       <thead><tr><th>Severidad</th><th>Ejemplos</th><th>Decisión / respuesta</th></tr></thead>
       <tbody>
-        <tr><td><strong style="color:#f43f5e">Crítica</strong></td><td>Emergencia médica; seguridad; suspensión de actividad; incumplimiento legal.</td><td>Parar actividad cuando proceda, activar emergencias/sede, informar COO y CEO.</td></tr>
-        <tr><td><strong style="color:#f59e0b">Alta</strong></td><td>Video/mención de sponsor omitido; sala One-to-One no operativa; autobús insuficiente; proveedor ausente.</td><td>COO designa solución inmediata, comunica a afectado y documenta.</td></tr>
-        <tr><td><strong style="color:#fbbf24">Media</strong></td><td>Demora de 10–20 min; faltante de kit; fila prolongada en buffet.</td><td>Jefe de actividad corrige y reporta en cierre diario.</td></tr>
+        <tr><td><strong style="color:#dc2626">Crítica</strong></td><td>Emergencia médica; seguridad; suspensión de actividad; incumplimiento legal.</td><td>Parar actividad cuando proceda, activar emergencias/sede, informar COO y CEO.</td></tr>
+        <tr><td><strong style="color:#d97706">Alta</strong></td><td>Video/mención de sponsor omitido; sala One-to-One no operativa; autobús insuficiente; proveedor ausente.</td><td>COO designa solución inmediata, comunica a afectado y documenta.</td></tr>
+        <tr><td><strong style="color:#ca8a04">Media</strong></td><td>Demora de 10–20 min; faltante de kit; fila prolongada en buffet.</td><td>Jefe de actividad corrige y reporta en cierre diario.</td></tr>
         <tr><td><strong style="color:var(--text3)">Baja</strong></td><td>Error menor en señalética; solicitud individual no crítica.</td><td>Staff resuelve o agenda acción en bitácora.</td></tr>
       </tbody>
     </table>
   </div>
-
   <div class="ft-card">
     <h3>FT-03 · Registro mínimo de una incidencia</h3>
     <p>Hora y lugar · actividad · reportante · descripción factual · impacto · responsable · medidas inmediatas · comunicación emitida · costo/implicación contractual · cierre/evidencia · aprendizaje.</p>
   </div>
-
   <div class="ft-card">
     <h3>FT-04 · Protocolo de comunicación y privacidad</h3>
     <ul>
@@ -1251,7 +1397,6 @@ function renderFT(main){
       <li>Fotografías y testimonios deben respetar autorizaciones y objeciones de los participantes.</li>
     </ul>
   </div>
-
   <div class="ft-card">
     <h3>FT-05 · Seguridad de eventos con alcohol, deporte y entretenimiento</h3>
     <ul>
@@ -1264,13 +1409,11 @@ function renderFT(main){
   </div>`;
 }
 
-// ── KPI ────────────────────────────────────────────
 function renderKPI(main){
   main.innerHTML=`<div class="section-header">
-    <h2>▤ Indicadores, RACI y Lecciones Aprendidas</h2>
+    <h2>Indicadores, RACI y Lecciones Aprendidas</h2>
     <p>R= ejecuta; A= aprueba/rinde cuenta; C= consultado; I= informado.</p>
   </div>
-
   <div class="anexo-section">
     <h3>12. Matriz de Responsabilidades y Entregables</h3>
     <table class="data-table">
@@ -1294,7 +1437,6 @@ function renderKPI(main){
       </tbody>
     </table>
   </div>
-
   <div class="anexo-section">
     <h3>13. Indicadores y Lecciones Aprendidas</h3>
     <table class="data-table">
@@ -1316,13 +1458,11 @@ function renderKPI(main){
   </div>`;
 }
 
-// ── Anexos ─────────────────────────────────────────
 function renderAnexos(main){
   main.innerHTML=`<div class="section-header">
-    <h2>◫ Anexos y Formatos Mínimos</h2>
+    <h2>Anexos y Formatos Mínimos</h2>
     <p>Versión 0.3 · Referencia permanente para todas las ediciones.</p>
   </div>
-
   <div class="anexo-section">
     <h3>14.1 Controles operativos de uso obligatorio</h3>
     <table class="data-table">
@@ -1349,7 +1489,6 @@ function renderAnexos(main){
       </tbody>
     </table>
   </div>
-
   <div class="anexo-section">
     <h3>14.2 Plantilla de minuto a minuto</h3>
     <table class="minuto-table">
@@ -1365,7 +1504,6 @@ function renderAnexos(main){
       </tbody>
     </table>
   </div>
-
   <div class="anexo-section">
     <h3>14.3 Checklist de liberación por actividad</h3>
     <div class="info-box">
@@ -1381,10 +1519,9 @@ function renderAnexos(main){
       </ul>
     </div>
   </div>
-
   <div class="anexo-section">
     <h3>Anexo A — Caso de referencia: Playa del Carmen 2026</h3>
-    <div class="info-box" style="margin-bottom:10px"><strong>Naturaleza del anexo:</strong> Caso real relatado por la organización y contrastado con el cartel de agenda. Sirve para dar escala y visualizar dependencias; no fija obligatoriamente días, sedes ni actividades futuras.</div>
+    <div class="info-box" style="margin-bottom:12px"><strong>Naturaleza del anexo:</strong> Caso real relatado por la organización y contrastado con el cartel de agenda. Sirve para dar escala y visualizar dependencias; no fija obligatoriamente días, sedes ni actividades futuras.</div>
     <table class="data-table">
       <thead><tr><th>Fecha</th><th>Programa comunicado</th><th>Observaciones de operación</th></tr></thead>
       <tbody>
@@ -1398,10 +1535,9 @@ function renderAnexos(main){
     </table>
     <div class="note-box">⚠️ Las horas del calendario de 2026 son las publicadas en la imagen. En narración oral surgieron algunas horas aproximadas distintas; prevalece la agenda visual como referencia oficial.</div>
   </div>
-
   <div class="anexo-section">
     <h3>Anexo B — Referencia de Patrocinadores y Reconocimientos 2026</h3>
-    <div class="info-box" style="margin-bottom:10px">Listado extraído de la hoja SPONSORS-1(2).pdf entregada por la organización. Utilizar solo como ejemplo y cotejar contra contratos y artes originales de cada edición.</div>
+    <div class="info-box" style="margin-bottom:12px">Listado extraído de la hoja SPONSORS-1(2).pdf entregada por la organización. Utilizar solo como ejemplo y cotejar contra contratos y artes originales de cada edición.</div>
     <table class="data-table">
       <thead><tr><th>Empresa</th><th>Categoría / actividad</th></tr></thead>
       <tbody>
@@ -1418,7 +1554,6 @@ function renderAnexos(main){
       </tbody>
     </table>
   </div>
-
   <div class="anexo-section">
     <h3>Anexo C — Puntos Abiertos para Revisión del Equipo</h3>
     <table class="data-table">
@@ -1441,7 +1576,6 @@ function renderAnexos(main){
   </div>`;
 }
 
-// ── Toggle proc ────────────────────────────────────
 function toggleProc(procId){
   const body=document.getElementById('body-'+procId);
   const header=document.querySelector(`#card-${procId} .proc-header`);
@@ -1453,17 +1587,26 @@ function toggleProc(procId){
   if(toggle) toggle.textContent=isOpen?'▸':'▾';
 }
 
-// ── Toggle check ───────────────────────────────────
-function toggleCheck(key,val){
-  checks[key]=val;
-  saveChecks();
-  const label=document.querySelector(`input[data-check="${key}"]`)?.closest('.check-item')?.querySelector('.check-label');
-  if(label) label.classList.toggle('checked',val);
+const STEP_IC_G={pending:['○','Pendiente'],active:['◑','En proceso'],done:['✓','Listo'],blocked:['✕','Bloqueado']};
+function cycleStep(key){
+  const order=['pending','active','done','blocked'];
+  const cur=stepStatus[key]||'pending';
+  const next=order[(order.indexOf(cur)+1)%order.length];
+  stepStatus[key]=next;
+  saveStepStatus();
+  const btn=document.querySelector(`[data-action="cycleStep"][data-key="${key}"]`);
+  if(btn){
+    btn.setAttribute('data-status',next);
+    btn.innerHTML=`<span class="ss-icon">${STEP_IC_G[next][0]}</span>${STEP_IC_G[next][1]}`;
+    btn.title='Clic para cambiar estado';
+    const label=btn.closest('.check-item')?.querySelector('.check-label');
+    if(label) label.className='check-label'+(next==='done'?' checked':next==='blocked'?' blocked':'');
+  }
   const parts=key.split('-');
   const procId=parts.slice(0,parts.length-1).join('-');
   const proc=PROCS.find(p=>p.id===procId);
-  if(proc){
-    const done=proc.steps.filter((_,i)=>checks[procId+'-'+i]).length;
+  if(proc&&proc.steps.length>0){
+    const done=proc.steps.filter((_,i)=>(stepStatus[procId+'-'+i]||'pending')==='done').length;
     const pct=Math.round(done/proc.steps.length*100);
     const fill=document.querySelector('#card-'+procId+' .progress-fill');
     if(fill) fill.style.width=pct+'%';
@@ -1471,13 +1614,10 @@ function toggleCheck(key,val){
     if(lbl) lbl.textContent=pct+'%';
   }
 }
+function toggleCheck(key,val){checks[key]=val;saveChecks();}
 
-// ── Navigate ───────────────────────────────────────
 function go(id){
-  if(id&&id.endsWith('-toggle')){
-    toggleProc(id.replace('-toggle',''));
-    return;
-  }
+  if(id&&id.endsWith('-toggle')){toggleProc(id.replace('-toggle',''));return;}
   currentStage=id;
   renderNav();
   renderStage();
@@ -1485,7 +1625,14 @@ function go(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── Set role ───────────────────────────────────────
+function setStatus(procId,val){
+  procStatus[procId]=val;
+  saveStatus();
+  document.querySelectorAll(`[data-action="setStatus"][data-proc="${procId}"]`).forEach(b=>{
+    b.classList.toggle('on',b.dataset.val===val);
+  });
+}
+
 function setRole(role){
   currentRole=role;
   renderRoleBar();
@@ -1497,28 +1644,23 @@ function setRole(role){
   updateRoleCounts();
 }
 
-// ── Keyboard nav ───────────────────────────────────
 document.addEventListener('keydown',function(e){
   if(e.key==='Enter'||e.key===' '){
     const el=e.target.closest('[data-action="go"],[data-action="setRole"]');
-    if(el){ e.preventDefault(); el.click(); }
+    if(el){e.preventDefault();el.click();}
   }
 });
-
-// ── Event delegation ───────────────────────────────
 document.addEventListener('click',function(e){
+  const cyEl=e.target.closest('[data-action="cycleStep"]');
+  if(cyEl){e.stopPropagation();cycleStep(cyEl.dataset.key);return;}
+  const stEl=e.target.closest('[data-action="setStatus"]');
+  if(stEl){setStatus(stEl.dataset.proc,stEl.dataset.val);return;}
   const goEl=e.target.closest('[data-action="go"]');
   if(goEl){go(goEl.dataset.stage);return;}
   const roleEl=e.target.closest('[data-action="setRole"]');
   if(roleEl){setRole(roleEl.dataset.role);return;}
 });
-document.addEventListener('change',function(e){
-  if(e.target.dataset.action==='toggleCheck'){
-    toggleCheck(e.target.dataset.check,e.target.checked);
-  }
-});
 
-// ── Init ───────────────────────────────────────────
 renderNav();
 renderStage();
 updateRoleCounts();
